@@ -1,61 +1,108 @@
 ---
-title : "Thiết bị MFA ảo"
-date :  "`r Sys.Date()`" 
+title : "Triển khai Backend"
+date : "`r Sys.Date()`"
 weight : 1
 chapter : false
-pre : " <b> 2.1 </b> "
+pre : " <b> 4.1 </b> "
 ---
 
-## Kích hoạt Multi-Factor Authentication (MFA) trên AWS
+## Các bước triển khai
 
-{{% notice note %}}
-Để kích hoạt MFA, bạn cần đăng nhập vào AWS sử dụng tài khoản root.
-{{% /notice %}}
+#### SSh vào EC2
+Ở phần này mình dùng MobaXterm các bạn có thể tải [tại đây](https://mobaxterm.mobatek.net/):  
+1. Sau khi cài đặt xong, trong giao diện chính, chọn **Sessions** -> **New Session** sau đó chọn **SSH**
 
-## Kích hoạt thiết bị MFA ảo thông qua Console
+![Deploy Backend](/images/4/0041.png?featherlight=false&width=90pc)
 
-Để thiết lập và kích hoạt thiết bị MFA ảo, bạn có thể tuân theo các bước sau:
+2. Quay lại EC2 Console, trong phần **Instances** chọn **Instances** sau đó chọn EC2 đã tạo và chọn **Connect**
 
-1. Đăng nhập vào [AWS Console](https://aws.amazon.com/console/).
-2. Ở góc trên bên phải, bạn sẽ thấy tên tài khoản của bạn. Nhấp vào tên và chọn **My Security Credentials**.
+![Deploy Backend](/images/3/0032.png?featherlight=false&width=90pc)
 
-   ![MFA](/images/2/0001.png?featherlight=false&width=90pc)
+3. Trong tab **SHH client** copy **Public DNS**
 
-3. Mở rộng mục **Multi-factor authentication (MFA)** và chọn **Assign MFA**.
+4. Trong phần **Basic SSH settings** của MobaXterm:
+   - Dán **Public DNS** vừa copy vào **Remote host**
+   - Tick vào **Specify username** và nhập ```ec2-user```
+5. Chọn **Advanced SSH settings**:
+   - Tick **Use private key** và chọn file **my-workshop-keypair.pem** đã lưu
+   - Nhấn **OK** để connect
 
-   ![MFA](/images/2/0002.png?featherlight=false&width=90pc)
+![Deploy Backend](/images/4/0042.png?featherlight=false&width=90pc)
 
-4. Trong giao diện **Select MFA device**, nhập tên cho thiết bị MFA của bạn:
+6. Chọn **Access** 
 
-   - Chọn **MFA device** là **Authenticator app**.
-   - Chọn **Next**.
+![Deploy Backend](/images/4/0043.png?featherlight=false&width=90pc)
 
-   ![MFA](/images/2/0003.png?featherlight=false&width=90pc)
+![Deploy Backend](/images/4/0044.png?featherlight=false&width=90pc)
 
-5. Tiến hành cài đặt ứng dụng xác thực trên điện thoại của bạn. Danh sách [ứng dụng MFA tương thích](https://aws.amazon.com/iam/features/mfa/?audit=2019q1).
+#### Tải source code từ Github về EC2 và cài các thư viện cần thiết
 
-   ![MFA](/images/2/0004.png?featherlight=false&width=90pc)
+1. Trong EC2 chạy câu lệnh sau để cài git
+```bash
+sudo yum install git -y
+```
 
-6. Bạn có thể tìm ứng dụng **Authenticator** trên [Chrome Web Store](https://chrome.google.com/webstore/detail/authenticator/bhghoamapcdpbohphigoooaddinpkbai). Sau đó nhấp vào **Add to Chrome** để cài đặt.
+2. Clone project
+```bash
+git clone PROJECT_LINK
+```
 
-   ![MFA](/images/2/0005.png?featherlight=false&width=90pc)
+3. Refresh thư mục để kiểm tra
 
-7. Sử dụng mã xác thực MFA để nhập vào xác nhận.
+![Deploy Backend](/images/4/0045.png?featherlight=false&width=90pc)
 
-   ![MFA](/images/2/0006.png?featherlight=false&width=90pc)
+4. Cài nvm 
 
-8. Thực hiện quét mã QR.
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+```
 
-   ![MFA](/images/2/0007.png?featherlight=false&width=90pc)
+5. Kích hoạt nvm export 
+```bash
+NVM_DIR="$HOME/.nvm"
+source "$NVM_DIR/nvm.sh"
+```
 
-9. Sau khi quét mã QR, bạn cần nhập 2 mã xác thực từ ứng dụng MFA.
+6. Cài và sử dụng node nvm install 16
 
-   ![MFA](/images/2/0008.png?featherlight=false&width=90pc)
+```bash
+nvm use 16
+```
 
-10. Sau khi nhập mã xác thực, chọn **Add MFA** để hoàn thành quá trình thêm MFA.
+7. Kiểm tra node
 
-   ![MFA](/images/2/0009.png?featherlight=false&width=90pc)
+```bash
+node -v
+npm -v
+```
 
-11. Quá trình thêm MFA đã hoàn tất.
+8. Trong thư mục project, tạo các file cần thiết như .env
 
-   ![MFA](/images/2/00010.png?featherlight=false&width=90pc)
+9. Tải dependencies
+
+```bash
+cd project
+npm install
+```
+
+#### Kết nối tới DocumentDB và FE
+
+1. Tải tệp [global bundle.pem](https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem) và upload lên thư mục project 
+
+   {{% notice tip %}}
+   Khi tải về nên đặt trong Downloads hoặc Documents của của user bạn dang dùng để tránh gặp lỗi permission khi upload
+   {{% /notice %}}
+
+2. Vào DocumentDB console tại **Clusters** chọn DocumentDB đã tạo copy phần **connect with application**
+
+![Deploy Backend](/images/4/0049.png?featherlight=false&width=90pc)
+
+3. Sau đó nhập mật khẩu của bạn vào uri vừa copy và đặt vào phần mongoose.connect trong project trên ec2
+
+4. Copy đường dẫn đến static website hosting s3 của bạn và đặt vào urlFE axios trong Backend
+
+5. Chạy Backend để kiểm tra
+
+```bash
+npm start
+```

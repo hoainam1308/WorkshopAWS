@@ -1,61 +1,47 @@
 ---
-title : "Thiết bị MFA ảo"
-date :  "`r Sys.Date()`" 
-weight : 1
+title : "Tạo DocumentDB"
+date : "`r Sys.Date()`"
+weight : 2
 chapter : false
-pre : " <b> 2.1 </b> "
+pre : " <b> 3.2 </b> "
 ---
 
-## Kích hoạt Multi-Factor Authentication (MFA) trên AWS
+#### Tạo DocumentDB
 
-{{% notice note %}}
-Để kích hoạt MFA, bạn cần đăng nhập vào AWS sử dụng tài khoản root.
-{{% /notice %}}
+1. Mở Amazon DocumentDB console tại https://console.aws.amazon.com/docdb
 
-## Kích hoạt thiết bị MFA ảo thông qua Console
+2. Tại danh sách **Clusters** chọn **Create**
 
-Để thiết lập và kích hoạt thiết bị MFA ảo, bạn có thể tuân theo các bước sau:
+![Tạo DocumentDB Cluster](/images/3/0034.png?featherlight=false&width=90pc)
 
-1. Đăng nhập vào [AWS Console](https://aws.amazon.com/console/).
-2. Ở góc trên bên phải, bạn sẽ thấy tên tài khoản của bạn. Nhấp vào tên và chọn **My Security Credentials**.
+3. Chọn **Instance-based cluster**
 
-   ![MFA](/images/2/0001.png?featherlight=false&width=90pc)
+4. Tại **Number of regular replica instances** nhập số lượng bản sau
 
-3. Mở rộng mục **Multi-factor authentication (MFA)** và chọn **Assign MFA**.
+![Tạo DocumentDB Cluster](/images/3/0035.png?featherlight=false&width=90pc)
 
-   ![MFA](/images/2/0002.png?featherlight=false&width=90pc)
+5. Ở phần **Authentication**:
+   - Nhập Username ví dụ: ```workshopdb```
+   - Chọn **Self managed**
+   - Nhập **Password** và **Confirm**
 
-4. Trong giao diện **Select MFA device**, nhập tên cho thiết bị MFA của bạn:
+![Tạo DocumentDB Cluster](/images/3/0038.png?featherlight=false&width=90pc)
 
-   - Chọn **MFA device** là **Authenticator app**.
-   - Chọn **Next**.
+6. Chọn show **advanced settings**, trong phần **Network settings**:
+   - Chọn **VPC** đã tạo
+   - Chọn **subnet group** đã tạo
+   {{% notice tip %}}
+   Nếu bạn không thấy VPC, hãy reload lại trang web
+   {{% /notice %}}
 
-   ![MFA](/images/2/0003.png?featherlight=false&width=90pc)
+![Tạo DocumentDB Cluster](/images/3/0037.png?featherlight=false&width=90pc)
 
-5. Tiến hành cài đặt ứng dụng xác thực trên điện thoại của bạn. Danh sách [ứng dụng MFA tương thích](https://aws.amazon.com/iam/features/mfa/?audit=2019q1).
+7. Quay lại **Connectivity** ở trên chọn **Connect to an EC2 compute resource** và chọn **EC2** đã tạo
 
-   ![MFA](/images/2/0004.png?featherlight=false&width=90pc)
+![Tạo DocumentDB Cluster](/images/3/0039.png?featherlight=false&width=90pc)
 
-6. Bạn có thể tìm ứng dụng **Authenticator** trên [Chrome Web Store](https://chrome.google.com/webstore/detail/authenticator/bhghoamapcdpbohphigoooaddinpkbai). Sau đó nhấp vào **Add to Chrome** để cài đặt.
+8. (Option) Uncheck Enable delection protection để sau này dễ dọn dẹp resouces
 
-   ![MFA](/images/2/0005.png?featherlight=false&width=90pc)
+9. Chọn **Create cluster** để tạo
 
-7. Sử dụng mã xác thực MFA để nhập vào xác nhận.
-
-   ![MFA](/images/2/0006.png?featherlight=false&width=90pc)
-
-8. Thực hiện quét mã QR.
-
-   ![MFA](/images/2/0007.png?featherlight=false&width=90pc)
-
-9. Sau khi quét mã QR, bạn cần nhập 2 mã xác thực từ ứng dụng MFA.
-
-   ![MFA](/images/2/0008.png?featherlight=false&width=90pc)
-
-10. Sau khi nhập mã xác thực, chọn **Add MFA** để hoàn thành quá trình thêm MFA.
-
-   ![MFA](/images/2/0009.png?featherlight=false&width=90pc)
-
-11. Quá trình thêm MFA đã hoàn tất.
-
-   ![MFA](/images/2/00010.png?featherlight=false&width=90pc)
+![Tạo DocumentDB Cluster](/images/3/0040.png?featherlight=false&width=90pc)

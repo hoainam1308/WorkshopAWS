@@ -1,61 +1,55 @@
 ---
-title : "Thiết bị MFA ảo"
-date :  "`r Sys.Date()`" 
+title : "Tạo EC2 Instance"
+date : "`r Sys.Date()`"
 weight : 1
 chapter : false
-pre : " <b> 2.1 </b> "
+pre : " <b> 3.1 </b> "
 ---
 
-## Kích hoạt Multi-Factor Authentication (MFA) trên AWS
+**ℹ️ Thông tin:** Amazon EC2 (Elastic Compute Cloud) cung cấp năng lực điện toán có thể mở rộng trên AWS Cloud, loại bỏ nhu cầu đầu tư vào phần cứng ngay từ đầu.
 
-{{% notice note %}}
-Để kích hoạt MFA, bạn cần đăng nhập vào AWS sử dụng tài khoản root.
-{{% /notice %}}
+Để tạo phiên bản Linux EC2 bằng AWS Management Console, hãy làm theo các hướng dẫn sau. Hướng dẫn này giúp bạn nhanh chóng khởi chạy phiên bản đầu tiên của mình với các cấu hình cần thiết
 
-## Kích hoạt thiết bị MFA ảo thông qua Console
+#### Tạo EC2 Instance
 
-Để thiết lập và kích hoạt thiết bị MFA ảo, bạn có thể tuân theo các bước sau:
+1. Mở trình duyệt web và điều hướng đến bảng điều khiển Amazon EC2 tại https://console.aws.amazon.com/ec2/.
 
-1. Đăng nhập vào [AWS Console](https://aws.amazon.com/console/).
-2. Ở góc trên bên phải, bạn sẽ thấy tên tài khoản của bạn. Nhấp vào tên và chọn **My Security Credentials**.
+![Tạo EC2](/images/3/0024.png?featherlight=false&width=90pc)
 
-   ![MFA](/images/2/0001.png?featherlight=false&width=90pc)
+2. Trong thanh điều hướng bên trái, ở phần **Instances** chọn **Instances**, sau đó ấn **Launch instances**.
 
-3. Mở rộng mục **Multi-factor authentication (MFA)** và chọn **Assign MFA**.
+3. Nhập tên ví dụ: ```workshop-ec2```
 
-   ![MFA](/images/2/0002.png?featherlight=false&width=90pc)
+4. Trong phần **Application and OS Images**:
+   - Chọn **Amazon Linux**
+   - Trong **Amazon Machine Image (AMI)** chọn **Amazon Linux 2 AMI**
 
-4. Trong giao diện **Select MFA device**, nhập tên cho thiết bị MFA của bạn:
+![Tạo EC2](/images/3/0025.png?featherlight=false&width=90pc)
 
-   - Chọn **MFA device** là **Authenticator app**.
-   - Chọn **Next**.
+5. Chọn **t2.micro** trong **Instance type**
 
-   ![MFA](/images/2/0003.png?featherlight=false&width=90pc)
+![Tạo EC2](/images/3/0026.png?featherlight=false&width=90pc)
 
-5. Tiến hành cài đặt ứng dụng xác thực trên điện thoại của bạn. Danh sách [ứng dụng MFA tương thích](https://aws.amazon.com/iam/features/mfa/?audit=2019q1).
+6. Trong phần **Key pair** chọn **Create new key pair**
+   - Nhập tên key pair ví dụ: ```my-workshop-keypair```
+   - Tại Key pair type chọn **.RSA**
+   - Private key file format chọn **.pem**
+   - Chọn **Create key pair** và lưu key pair vào nơi thích hợp
 
-   ![MFA](/images/2/0004.png?featherlight=false&width=90pc)
+![Tạo EC2](/images/3/0027.png?featherlight=false&width=90pc)
 
-6. Bạn có thể tìm ứng dụng **Authenticator** trên [Chrome Web Store](https://chrome.google.com/webstore/detail/authenticator/bhghoamapcdpbohphigoooaddinpkbai). Sau đó nhấp vào **Add to Chrome** để cài đặt.
+7. Trong phần **Network settings** chọn **Edit**
+   - Chọn **VPC đã tạo**
+   - Chọn **public subnet** đã **enable Auto-assign public IP**
+   - Chọn **Select existing security group**
+   - Chọn security group đã tạo cho ec2 **workshop-ec2-sg**
 
-   ![MFA](/images/2/0005.png?featherlight=false&width=90pc)
+![Tạo EC2](/images/3/0028.png?featherlight=false&width=90pc)
 
-7. Sử dụng mã xác thực MFA để nhập vào xác nhận.
+![Tạo EC2](/images/3/0029.png?featherlight=false&width=90pc)
 
-   ![MFA](/images/2/0006.png?featherlight=false&width=90pc)
+8. Kiểm tra lại trong **Summary** và chọn **Launch instance**
 
-8. Thực hiện quét mã QR.
+![Tạo EC2](/images/3/0031.png?featherlight=false&width=90pc)
 
-   ![MFA](/images/2/0007.png?featherlight=false&width=90pc)
-
-9. Sau khi quét mã QR, bạn cần nhập 2 mã xác thực từ ứng dụng MFA.
-
-   ![MFA](/images/2/0008.png?featherlight=false&width=90pc)
-
-10. Sau khi nhập mã xác thực, chọn **Add MFA** để hoàn thành quá trình thêm MFA.
-
-   ![MFA](/images/2/0009.png?featherlight=false&width=90pc)
-
-11. Quá trình thêm MFA đã hoàn tất.
-
-   ![MFA](/images/2/00010.png?featherlight=false&width=90pc)
+![Tạo EC2](/images/3/0022.png?featherlight=false&width=90pc)

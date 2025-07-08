@@ -26,6 +26,18 @@
                 href="//localhost:1313/vi/"
                 />
   </url><url>
+    <loc>//localhost:1313/vi/3-initialize-aws-services/1-create-ec2-instance/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="//localhost:1313/3-initialize-aws-services/1-create-ec2-instance/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="//localhost:1313/vi/3-initialize-aws-services/1-create-ec2-instance/"
+                />
+  </url><url>
     <loc>//localhost:1313/vi/2-preparation/1-create-vpc/</loc>
     <xhtml:link
                 rel="alternate"
@@ -38,16 +50,28 @@
                 href="//localhost:1313/vi/2-preparation/1-create-vpc/"
                 />
   </url><url>
-    <loc>//localhost:1313/vi/3-initialize-aws-services/1-create-ec2-instance/</loc>
+    <loc>//localhost:1313/vi/4-deploy-project/1-deploy-be-nodejs-ec2/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="//localhost:1313/3-initialize-aws-services/1-create-ec2-instance/"
+                href="//localhost:1313/4-deploy-project/1-deploy-be-nodejs-ec2/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="//localhost:1313/vi/3-initialize-aws-services/1-create-ec2-instance/"
+                href="//localhost:1313/vi/4-deploy-project/1-deploy-be-nodejs-ec2/"
+                />
+  </url><url>
+    <loc>//localhost:1313/vi/2-preparation/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="//localhost:1313/2-preparation/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="//localhost:1313/vi/2-preparation/"
                 />
   </url><url>
     <loc>//localhost:1313/vi/3-initialize-aws-services/2-create-documentdb-cluster/</loc>
@@ -62,28 +86,16 @@
                 href="//localhost:1313/vi/3-initialize-aws-services/2-create-documentdb-cluster/"
                 />
   </url><url>
-    <loc>//localhost:1313/vi/3-initialize-aws-services/3-create-s3-bucket/</loc>
+    <loc>//localhost:1313/vi/2-preparation/2-create-security-group/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="//localhost:1313/3-initialize-aws-services/3-create-s3-bucket/"
+                href="//localhost:1313/2-preparation/2-create-security-group/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="//localhost:1313/vi/3-initialize-aws-services/3-create-s3-bucket/"
-                />
-  </url><url>
-    <loc>//localhost:1313/vi/4-deploy-project/1-deploy-be-nodejs-ec2/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="//localhost:1313/4-deploy-project/1-deploy-be-nodejs-ec2/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="//localhost:1313/vi/4-deploy-project/1-deploy-be-nodejs-ec2/"
+                href="//localhost:1313/vi/2-preparation/2-create-security-group/"
                 />
   </url><url>
     <loc>//localhost:1313/vi/4-deploy-project/2-restore-mongo-data-documentdb/</loc>
@@ -110,30 +122,6 @@
                 href="//localhost:1313/vi/4-deploy-project/3-test-website/"
                 />
   </url><url>
-    <loc>//localhost:1313/vi/2-preparation/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="//localhost:1313/2-preparation/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="//localhost:1313/vi/2-preparation/"
-                />
-  </url><url>
-    <loc>//localhost:1313/vi/2-preparation/2-create-security-group/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="//localhost:1313/2-preparation/2-create-security-group/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="//localhost:1313/vi/2-preparation/2-create-security-group/"
-                />
-  </url><url>
     <loc>//localhost:1313/vi/3-initialize-aws-services/</loc>
     <xhtml:link
                 rel="alternate"
@@ -144,6 +132,18 @@
                 rel="alternate"
                 hreflang="vi"
                 href="//localhost:1313/vi/3-initialize-aws-services/"
+                />
+  </url><url>
+    <loc>//localhost:1313/vi/3-initialize-aws-services/3-create-s3-bucket/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="//localhost:1313/3-initialize-aws-services/3-create-s3-bucket/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="//localhost:1313/vi/3-initialize-aws-services/3-create-s3-bucket/"
                 />
   </url><url>
     <loc>//localhost:1313/vi/2-preparation/3-create-subnet-group/</loc>

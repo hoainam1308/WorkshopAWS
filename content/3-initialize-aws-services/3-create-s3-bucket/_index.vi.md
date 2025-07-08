@@ -1,61 +1,86 @@
 ---
-title : "Thiết bị MFA ảo"
-date :  "`r Sys.Date()`" 
-weight : 1
+title : "Tạo S3 Bucket"
+date : "`r Sys.Date()`"
+weight : 3
 chapter : false
-pre : " <b> 2.1 </b> "
+pre : " <b> 3.3 </b> "
 ---
 
-## Kích hoạt Multi-Factor Authentication (MFA) trên AWS
+#### Tạo S3 Bucket
 
-{{% notice note %}}
-Để kích hoạt MFA, bạn cần đăng nhập vào AWS sử dụng tài khoản root.
-{{% /notice %}}
+1. Mở Amazon S3 console tại https://console.aws.amazon.com/s3 chọn Create bucket
 
-## Kích hoạt thiết bị MFA ảo thông qua Console
+![Tạo S3 Bucket](/images/3/0052.png?featherlight=false&width=90pc)
 
-Để thiết lập và kích hoạt thiết bị MFA ảo, bạn có thể tuân theo các bước sau:
+2. Nhập bucket name ví dụ: ```workshop-s3-fe```
 
-1. Đăng nhập vào [AWS Console](https://aws.amazon.com/console/).
-2. Ở góc trên bên phải, bạn sẽ thấy tên tài khoản của bạn. Nhấp vào tên và chọn **My Security Credentials**.
+![Tạo S3 Bucket](/images/3/0053.png?featherlight=false&width=90pc)
 
-   ![MFA](/images/2/0001.png?featherlight=false&width=90pc)
+3. Uncheck **Block all public access** và check vào xác nhận bên dưới
 
-3. Mở rộng mục **Multi-factor authentication (MFA)** và chọn **Assign MFA**.
+![Tạo S3 Bucket](/images/3/0054.png?featherlight=false&width=90pc)
 
-   ![MFA](/images/2/0002.png?featherlight=false&width=90pc)
+4. Kiểm tra và **Create bucket**
 
-4. Trong giao diện **Select MFA device**, nhập tên cho thiết bị MFA của bạn:
+![Tạo S3 Bucket](/images/3/0055.png?featherlight=false&width=90pc)
 
-   - Chọn **MFA device** là **Authenticator app**.
-   - Chọn **Next**.
+![Tạo S3 Bucket](/images/3/0056.png?featherlight=false&width=90pc)
 
-   ![MFA](/images/2/0003.png?featherlight=false&width=90pc)
+5. Trong tab **permission** của bucket vừa tạo, tại phần **Bucket policy** chọn **Edit**, copy đoạn code sau và cho vào **Policy**:
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "PublicReadGetObject",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::workshop-s3-fe/*"
+    }
+  ]
+}
+```
 
-5. Tiến hành cài đặt ứng dụng xác thực trên điện thoại của bạn. Danh sách [ứng dụng MFA tương thích](https://aws.amazon.com/iam/features/mfa/?audit=2019q1).
+![Tạo S3 Bucket](/images/3/0058.png?featherlight=false&width=90pc)
 
-   ![MFA](/images/2/0004.png?featherlight=false&width=90pc)
+![Tạo S3 Bucket](/images/3/0060.png?featherlight=false&width=90pc)
 
-6. Bạn có thể tìm ứng dụng **Authenticator** trên [Chrome Web Store](https://chrome.google.com/webstore/detail/authenticator/bhghoamapcdpbohphigoooaddinpkbai). Sau đó nhấp vào **Add to Chrome** để cài đặt.
+![Tạo S3 Bucket](/images/3/0061.png?featherlight=false&width=90pc)
 
-   ![MFA](/images/2/0005.png?featherlight=false&width=90pc)
+6. Chọn **Save changes**
 
-7. Sử dụng mã xác thực MFA để nhập vào xác nhận.
+![Tạo S3 Bucket](/images/3/0062.png?featherlight=false&width=90pc)
 
-   ![MFA](/images/2/0006.png?featherlight=false&width=90pc)
+![Tạo S3 Bucket](/images/3/0063.png?featherlight=false&width=90pc)
 
-8. Thực hiện quét mã QR.
+7. Lấy địa chỉ EC2 để cấu hình urlBE trong Frontend reactjs
 
-   ![MFA](/images/2/0007.png?featherlight=false&width=90pc)
+8. Build Frontend:
+   - Mở Fronend reactjs bằng Visual Studio Code
+   - Sửa lại biến môi trường ```VITE_BACKEND_URL``` trong file .env
+   - Build Frontendh bằng câu lẹnh ```npm run build``` trong terminal sẽ tạo ra folder **dist** (hoặc **build**)
 
-9. Sau khi quét mã QR, bạn cần nhập 2 mã xác thực từ ứng dụng MFA.
+![Tạo S3 Bucket](/images/3/0059.png?featherlight=false&width=90pc)
 
-   ![MFA](/images/2/0008.png?featherlight=false&width=90pc)
+9. Upload các file/folder trong thư mục vừa build được lên S3:
+   - Tại tab **Objects** của S3 bucket, chọn **Upload**
+   ![Tạo S3 Bucket](/images/3/0064.png?featherlight=false&width=90pc)
+   - Kéo các file/folder trong thư mục vừa build được vào phần **Upload**
+   ![Tạo S3 Bucket](/images/3/0065.png?featherlight=false&width=90pc)
+   ![Tạo S3 Bucket](/images/3/0066.png?featherlight=false&width=90pc)
+   - Chọn **Upload** và đợi upload xong
+   ![Tạo S3 Bucket](/images/3/0069.png?featherlight=false&width=90pc)
+   ![Tạo S3 Bucket](/images/3/0070.png?featherlight=false&width=90pc)
 
-10. Sau khi nhập mã xác thực, chọn **Add MFA** để hoàn thành quá trình thêm MFA.
 
-   ![MFA](/images/2/0009.png?featherlight=false&width=90pc)
-
-11. Quá trình thêm MFA đã hoàn tất.
-
-   ![MFA](/images/2/00010.png?featherlight=false&width=90pc)
+10. Enable static website hosting
+   - Tại tab **Properties**, trong phần **Static website hosting** chọn **Edit**
+   ![Tạo S3 Bucket](/images/3/0071.png?featherlight=false&width=90pc)
+   ![Tạo S3 Bucket](/images/3/0072.png?featherlight=false&width=90pc)
+   - Check **Enable** tại **Static website hosting**
+   - Trong phần **Index document** nhập ```index.html```
+   ![Tạo S3 Bucket](/images/3/0073.png?featherlight=false&width=90pc)
+   - Nhấn **Save change** để lưu lại và kiểm tra Frontend
+   ![Tạo S3 Bucket](/images/3/0074.png?featherlight=false&width=90pc)
+   ![Tạo S3 Bucket](/images/3/0075.png?featherlight=false&width=90pc)

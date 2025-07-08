@@ -1,61 +1,55 @@
 ---
-title : "Thiết bị MFA ảo"
-date :  "`r Sys.Date()`" 
-weight : 1
+title : "Trích xuất dữ liệu"
+date : "`r Sys.Date()`"
+weight : 2
 chapter : false
-pre : " <b> 2.1 </b> "
+pre : " <b> 4.2 </b> "
 ---
 
-## Kích hoạt Multi-Factor Authentication (MFA) trên AWS
+## Các bước thực hiện
 
-{{% notice note %}}
-Để kích hoạt MFA, bạn cần đăng nhập vào AWS sử dụng tài khoản root.
-{{% /notice %}}
+#### Dump dữ liệu từ MongoDB
+Ở phần này mình dùng [MongoDB Database Tools](https://www.mongodb.com/try/download/database-tools) để export data
+1. Trong máy local gọi lệnh
+```bash
+mongodump --uri="mongodb://localhost:27017/your_db" --out=dump-folder
+```
+2. Upload dump-folder vừa tạo lên ec2 tại thư mục ec2-user
 
-## Kích hoạt thiết bị MFA ảo thông qua Console
-
-Để thiết lập và kích hoạt thiết bị MFA ảo, bạn có thể tuân theo các bước sau:
-
-1. Đăng nhập vào [AWS Console](https://aws.amazon.com/console/).
-2. Ở góc trên bên phải, bạn sẽ thấy tên tài khoản của bạn. Nhấp vào tên và chọn **My Security Credentials**.
-
-   ![MFA](/images/2/0001.png?featherlight=false&width=90pc)
-
-3. Mở rộng mục **Multi-factor authentication (MFA)** và chọn **Assign MFA**.
-
-   ![MFA](/images/2/0002.png?featherlight=false&width=90pc)
-
-4. Trong giao diện **Select MFA device**, nhập tên cho thiết bị MFA của bạn:
-
-   - Chọn **MFA device** là **Authenticator app**.
-   - Chọn **Next**.
-
-   ![MFA](/images/2/0003.png?featherlight=false&width=90pc)
-
-5. Tiến hành cài đặt ứng dụng xác thực trên điện thoại của bạn. Danh sách [ứng dụng MFA tương thích](https://aws.amazon.com/iam/features/mfa/?audit=2019q1).
-
-   ![MFA](/images/2/0004.png?featherlight=false&width=90pc)
-
-6. Bạn có thể tìm ứng dụng **Authenticator** trên [Chrome Web Store](https://chrome.google.com/webstore/detail/authenticator/bhghoamapcdpbohphigoooaddinpkbai). Sau đó nhấp vào **Add to Chrome** để cài đặt.
-
-   ![MFA](/images/2/0005.png?featherlight=false&width=90pc)
-
-7. Sử dụng mã xác thực MFA để nhập vào xác nhận.
-
-   ![MFA](/images/2/0006.png?featherlight=false&width=90pc)
-
-8. Thực hiện quét mã QR.
-
-   ![MFA](/images/2/0007.png?featherlight=false&width=90pc)
-
-9. Sau khi quét mã QR, bạn cần nhập 2 mã xác thực từ ứng dụng MFA.
-
-   ![MFA](/images/2/0008.png?featherlight=false&width=90pc)
-
-10. Sau khi nhập mã xác thực, chọn **Add MFA** để hoàn thành quá trình thêm MFA.
-
-   ![MFA](/images/2/0009.png?featherlight=false&width=90pc)
-
-11. Quá trình thêm MFA đã hoàn tất.
-
-   ![MFA](/images/2/00010.png?featherlight=false&width=90pc)
+#### Restore dữ liệu lên DocumentDB
+1. Cài MongoDB tools trên EC2
+   - Quay về thư mục ec2-user 
+   ```bash
+   cd ~
+   ```
+   - Tạo file repo cho MongoDB  
+   ```bash
+   echo "[mongodb-org-6.0]  
+   name=MongoDB Repository  
+   baseurl=https://repo.mongodb.org/yum/amazon/2/mongodb-org/6.0/x86_64/  
+   gpgcheck=1  
+   enabled=1  
+   gpgkey=https://pgp.mongodb.com/server-6.0.asc" | sudo tee /etc/yum.repos.d/mongodb-org-6.0.repo
+   ```  
+   - Tải mongodb tools 
+   ```bash
+   sudo yum install -y mongodb-org-tools
+   ```
+2. Restore dữ liệu lên DocumentDB
+   - Tải file chứng chỉ 
+   ```bash
+   curl -O https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem
+   ```
+   - Restore lên DocumentDB
+   ```bash
+   mongorestore \
+   --host= docdb-xxxxx.cluster-xxxxx.us-east-1.docdb.amazonaws.com \
+   --port=27017 \
+   --ssl \
+   --tlsInsecure \
+   --username= YOUR_USER \
+   --password= YOUR_PASS \
+   --authenticationDatabase=admin \
+   dump-folder
+   ```
+Lưu ý: Muốn gọi dữ liệu đã restore lên DocumentDB phải thêm tên csdl vào uri của DocumentDB trong Backend
