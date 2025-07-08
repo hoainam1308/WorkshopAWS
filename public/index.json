@@ -1,0 +1,120 @@
+[
+{
+	"uri": "//localhost:1313/1-introduction/",
+	"title": "Giới thiệu",
+	"tags": [],
+	"description": "",
+	"content": "Nội dung:\nTổng quan dự án Amazon DocumentDB Tổng quan dự án Dự án website bán hàng được xây dựng với backend Node.js, cơ sở dữ liệu MongoDB và frontend React. Hệ thống hỗ trợ các tính năng cơ bản như: đăng ký, đăng nhập, thêm sản phẩm vào giỏ hàng, thanh toán và xem danh sách đơn hàng đã đặt. Đây là nền tảng có thể mở rộng cho các ứng dụng thương mại điện tử hiện đại.\nAmazon DocumentDB Amazon DocumentDB là dịch vụ cơ sở dữ liệu tài liệu tương thích MongoDB do AWS cung cấp, hỗ trợ hai loại cluster (instance-based và elastic) với khả năng mở rộng đọc/ghi lên đến hàng triệu yêu cầu mỗi giây. Dung lượng lưu trữ tự động tăng tối đa 128 TiB, hỗ trợ tối đa 15 bản sao để tăng hiệu năng đọc, và cho phép thay đổi tài nguyên tính toán linh hoạt. Dữ liệu được mã hóa bằng AWS KMS, chạy trong mạng riêng VPC, và hỗ trợ sao lưu tự động cùng khôi phục theo thời gian. DocumentDB có khả năng tự động khôi phục và chuyển đổi dự phòng (failover) khi có sự cố, đồng thời đáp ứng các tiêu chuẩn bảo mật nghiêm ngặt như FedRAMP.\nAmazon DocumentDB "
+},
+{
+	"uri": "//localhost:1313/",
+	"title": "Starting deploy web to AWS",
+	"tags": [],
+	"description": "",
+	"content": "Starting deploy web to AWS Dự Án Website Bán Hàng Dự án website bán hàng được xây dựng với backend Node.js, cơ sở dữ liệu MongoDB và frontend React. Hệ thống hỗ trợ các tính năng cơ bản như: đăng ký, đăng nhập, thêm sản phẩm vào giỏ hàng, thanh toán và xem danh sách đơn hàng đã đặt. Đây là nền tảng có thể mở rộng cho các ứng dụng thương mại điện tử hiện đại.\nCác Dịch vụ AWS Đã Sử Dụng Amazon EC2: Triển khai backend Node.js. Amazon S3: Lưu trữ và phân phối frontend React (tĩnh). Amazon DocumentDB: Cung cấp cơ sở dữ liệu tương thích MongoDB với khả năng mở rộng, sao lưu, và mã hóa. Main Content Giới thiệu Chuẩn bị Khởi tạo các dịch vụ AWS Triển khai dự án Dọn dẹp tài nguyên "
+},
+{
+	"uri": "//localhost:1313/3-initialize-aws-services/1-create-ec2-instance/",
+	"title": "Tạo EC2 Instance",
+	"tags": [],
+	"description": "",
+	"content": "ℹ️ Thông tin: Amazon EC2 (Elastic Compute Cloud) cung cấp năng lực điện toán có thể mở rộng trên AWS Cloud, loại bỏ nhu cầu đầu tư vào phần cứng ngay từ đầu.\nĐể tạo phiên bản Linux EC2 bằng AWS Management Console, hãy làm theo các hướng dẫn sau. Hướng dẫn này giúp bạn nhanh chóng khởi chạy phiên bản đầu tiên của mình với các cấu hình cần thiết\nTạo EC2 Instance Mở trình duyệt web và điều hướng đến bảng điều khiển Amazon EC2 tại https://console.aws.amazon.com/ec2/. Trong thanh điều hướng bên trái, ở phần Instances chọn Instances, sau đó ấn Launch instances.\nNhập tên ví dụ: workshop-ec2\nTrong phần Application and OS Images:\nChọn Amazon Linux Trong Amazon Machine Image (AMI) chọn Amazon Linux 2 AMI Chọn t2.micro trong Instance type Trong phần Key pair chọn Create new key pair Nhập tên key pair ví dụ: my-workshop-keypair Tại Key pair type chọn .RSA Private key file format chọn .pem Chọn Create key pair và lưu key pair vào nơi thích hợp Trong phần Network settings chọn Edit Chọn VPC đã tạo Chọn public subnet đã enable Auto-assign public IP Chọn Select existing security group Chọn security group đã tạo cho ec2 workshop-ec2-sg Kiểm tra lại trong Summary và chọn Launch instance "
+},
+{
+	"uri": "//localhost:1313/2-preparation/1-create-vpc/",
+	"title": "Tạo VPC",
+	"tags": [],
+	"description": "",
+	"content": "Tạo VPC với các Subnets và các tài nguyên liên quan ℹ️ Thông tin: Amazon Virtual Private Cloud (Amazon VPC) cho phép bạn khởi chạy tài nguyên AWS vào mạng ảo mà bạn đã xác định. Mạng ảo này rất giống với mạng truyền thống trong trung tâm dữ liệu của riêng bạn, với lợi ích là sử dụng cơ sở hạ tầng có thể mở rộng của AWS.\nThực hiện theo các bước sau để tạo VPC với tất cả các thành phần cần thiết cho việc triển khai website của bạn:\nMở Amazon VPC console tại https://console.aws.amazon.com/vpc/.\nTrên VPC dashboard, chọn Create VPC.\nĐể tạo Resource, chọn VPC and more để tạo môi trường VPC hoàn chỉnh. Cấu hình tùy chọn Auto-generate thẻ Name theo sở thích của bạn. Tùy chọn này cho phép AWS tự động tạo tên nhất quán cho tất cả tài nguyên VPC.\nNhập một dải địa chỉ IPv4 CIDR cho VPC của bạn (ví dụ: 10.0.0.0/16). Dải địa chỉ này xác định phạm vi IP có sẵn trong VPC.\n(Tùy chọn) Để bật hỗ trợ IPv6, chọn IPv6 CIDR block và chọn một dải IPv6 được Amazon cung cấp.\nĐối với Number of Availability Zones (AZs), chọn ít nhất hai AZs để đảm bảo tính sẵn sàng cao.\nChọn ít nhất hai private subnets để tạo subnet group cho DocumentDB.\nXem lại phần Preview để xem sơ đồ trực quan về kiến trúc VPC bạn đã cấu hình.\nChọn Create VPC để khởi tạo tất cả các tài nguyên đã cấu hình.\nCấu hình cho public subnet: Trong VPC console chọn public subnet Chọn Actions -\u0026gt; Edit subnet settings Check vào Enable auto-assign public IPv4 address "
+},
+{
+	"uri": "//localhost:1313/4-deploy-project/1-deploy-be-nodejs-ec2/",
+	"title": "Triển khai Backend",
+	"tags": [],
+	"description": "",
+	"content": "Các bước triển khai SSh vào EC2 Ở phần này mình dùng MobaXterm các bạn có thể tải tại đây:\nSau khi cài đặt xong, trong giao diện chính, chọn Sessions -\u0026gt; New Session sau đó chọn SSH Quay lại EC2 Console, trong phần Instances chọn Instances sau đó chọn EC2 đã tạo và chọn Connect Trong tab SHH client copy Public DNS\nTrong phần Basic SSH settings của MobaXterm:\nDán Public DNS vừa copy vào Remote host Tick vào Specify username và nhập ec2-user Chọn Advanced SSH settings:\nTick Use private key và chọn file my-workshop-keypair.pem đã lưu Nhấn OK để connect Chọn Access Tải source code từ Github về EC2 và cài các thư viện cần thiết Trong EC2 chạy câu lệnh sau để cài git sudo yum install git -y Clone project git clone PROJECT_LINK Refresh thư mục để kiểm tra Cài nvm curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash Kích hoạt nvm export NVM_DIR=\u0026#34;$HOME/.nvm\u0026#34; source \u0026#34;$NVM_DIR/nvm.sh\u0026#34; Cài và sử dụng node nvm install 16 nvm use 16 Kiểm tra node node -v npm -v Trong thư mục project, tạo các file cần thiết như .env\nTải dependencies\ncd project npm install Kết nối tới DocumentDB và FE Tải tệp global bundle.pem và upload lên thư mục project\nKhi tải về nên đặt trong Downloads hoặc Documents của của user bạn dang dùng để tránh gặp lỗi permission khi upload\nVào DocumentDB console tại Clusters chọn DocumentDB đã tạo copy phần connect with application\nSau đó nhập mật khẩu của bạn vào uri vừa copy và đặt vào phần mongoose.connect trong project trên ec2\nCopy đường dẫn đến static website hosting s3 của bạn và đặt vào urlFE axios trong Backend\nChạy Backend để kiểm tra\nnpm start "
+},
+{
+	"uri": "//localhost:1313/2-preparation/",
+	"title": "Chuẩn bị",
+	"tags": [],
+	"description": "",
+	"content": "Tổng quan ℹ️ Những gì cần chuẩn bị\nTrong workshop, bạn sẽ xây dựng một môi trường Amazon VPC hoàn chỉnh theo các biện pháp thực hành tốt nhất của AWS về kiến ​​trúc mạng và bảo mật. Bạn sẽ tạo tất cả các thành phần thiết yếu cần thiết cho việc triển khai VPC sẵn sàng cho production.\nNgoài ra các bạn nên để source code của mình trên github để dễ dàng tải xuống.\nBackend nodejs\nFrontend reacjs\nKiến trúc chúng tôi sẽ triển khai được minh họa trong sơ đồ bên dưới:\nCác bước chuẩn bị Ở phần này chúng ta sẽ Tạo VPC và các dịch vụ liên quan\nTạo VPC Tạo Security Group Tạo Subnet Group "
+},
+{
+	"uri": "//localhost:1313/3-initialize-aws-services/2-create-documentdb-cluster/",
+	"title": "Tạo DocumentDB",
+	"tags": [],
+	"description": "",
+	"content": "Tạo DocumentDB Mở Amazon DocumentDB console tại https://console.aws.amazon.com/docdb\nTại danh sách Clusters chọn Create\nChọn Instance-based cluster\nTại Number of regular replica instances nhập số lượng bản sau\nỞ phần Authentication: Nhập Username ví dụ: workshopdb Chọn Self managed Nhập Password và Confirm Chọn show advanced settings, trong phần Network settings: Chọn VPC đã tạo Chọn subnet group đã tạo Nếu bạn không thấy VPC, hãy reload lại trang web\nQuay lại Connectivity ở trên chọn Connect to an EC2 compute resource và chọn EC2 đã tạo (Option) Uncheck Enable delection protection để sau này dễ dọn dẹp resouces\nChọn Create cluster để tạo\n"
+},
+{
+	"uri": "//localhost:1313/2-preparation/2-create-security-group/",
+	"title": "Tạo Security Group",
+	"tags": [],
+	"description": "",
+	"content": "Tạo Security Group cho EC2 ℹ️ Thông tin: Security groups hoạt động như các tường lửa ảo cho các Amazon EC2 instances, giúp kiểm soát lưu lượng inbound (vào) và outbound (ra). Đối với triển khai DocumentDB, chúng ta cần tạo một security group cho các EC2 instances sẽ kết nối đến cơ sở dữ liệu của chúng ta.\nThực hiện theo các bước sau để tạo Security Group với các cổng cần thiết:\nMở Amazon VPC console tại https://console.aws.amazon.com/vpc/.\nTrong thanh điều hướng VPC, trong phần Security, chọn Security groups.\nChọn Create security group.\nTrong phần Basic details\nNhập tên security goup ví dụ: workshop-ec2-sg Nhập mô tả Trong phần VPC, chọn vpc vừa tạo trước đó Trong phần Inbound rules, Add rule để cấu hình quyền truy cập\nType: SSH, Source: My IP Type: HTTP, Source: Anywhere Type: HTTPS, Source: Anywhere Type: Custom TCP, Port range: 3000, Source: Anywhere Đối với môi trường production, hãy hạn chế địa chỉ IP nguồn để truy cập SSH chỉ ở các dải IP đáng tin cậy thay vì cho phép truy cập từ bất kỳ đâu (0.0.0.0/0).\nXem lại cài đặt của bạn và nhấp vào Create security group. Sau khi tạo, security group mới sẽ xuất hiện trong danh sách. Lưu ý ID vì bạn sẽ cần nó khi khởi chạy phiên bản EC2. Tạo Security Group cho DocumentDB Thực hiện theo các bước sau để tạo Security Group cho DocumentDB với các cổng cần thiết:\nTại danh sách Security Groups, chọn Create security group. Trong phần Basic details\nNhập tên security goup ví dụ: workshop-documentdb-sg Nhập mô tả Trong phần VPC, chọn vpc vừa tạo trước đó Trong phần Inbound rules, ấn Add rule để cấu hình quyền truy cập\nType: Custom TCP, Port range: 27017, Source: Custom và chọn workshop-ec2-sg Xem lại cài đặt của bạn và nhấp vào Create security group. "
+},
+{
+	"uri": "//localhost:1313/4-deploy-project/2-restore-mongo-data-documentdb/",
+	"title": "Trích xuất dữ liệu",
+	"tags": [],
+	"description": "",
+	"content": "Các bước thực hiện Dump dữ liệu từ MongoDB Ở phần này mình dùng MongoDB Database Tools để export data\nTrong máy local gọi lệnh mongodump --uri=\u0026#34;mongodb://localhost:27017/your_db\u0026#34; --out=dump-folder Upload dump-folder vừa tạo lên ec2 tại thư mục ec2-user Restore dữ liệu lên DocumentDB Cài MongoDB tools trên EC2 Quay về thư mục ec2-user cd ~ Tạo file repo cho MongoDB echo \u0026#34;[mongodb-org-6.0] name=MongoDB Repository baseurl=https://repo.mongodb.org/yum/amazon/2/mongodb-org/6.0/x86_64/ gpgcheck=1 enabled=1 gpgkey=https://pgp.mongodb.com/server-6.0.asc\u0026#34; | sudo tee /etc/yum.repos.d/mongodb-org-6.0.repo Tải mongodb tools sudo yum install -y mongodb-org-tools Restore dữ liệu lên DocumentDB Tải file chứng chỉ curl -O https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem Restore lên DocumentDB mongorestore \\ --host= docdb-xxxxx.cluster-xxxxx.us-east-1.docdb.amazonaws.com \\ --port=27017 \\ --ssl \\ --tlsInsecure \\ --username= YOUR_USER \\ --password= YOUR_PASS \\ --authenticationDatabase=admin \\ dump-folder Lưu ý: Muốn gọi dữ liệu đã restore lên DocumentDB phải thêm tên csdl vào uri của DocumentDB trong Backend\n"
+},
+{
+	"uri": "//localhost:1313/4-deploy-project/3-test-website/",
+	"title": "Chạy và kiểm tra",
+	"tags": [],
+	"description": "",
+	"content": "Chạy Backend với pm2 npm install -g pm2 pm2 start bin/www --name {myappname} pm2 list pm2 save pm2 startup Sau khi chạy xong sẽ trả về một dòng lệnh bạn chỉ cần chạy dòng lệnh đó là server backend sẽ hoạt động\nKiểm tra nhập dữ liệu vào DocumentDB Gọi hàm create sản phẩm với file ảnh trong body\nKiểm tra truy xuất dữ liệu trong DocumentDB trên web "
+},
+{
+	"uri": "//localhost:1313/3-initialize-aws-services/",
+	"title": "Khởi tạo các dịch vụ AWS cần thiết",
+	"tags": [],
+	"description": "",
+	"content": "EC2 Amazon DocumentDB Amazon Elastic Compute Cloud (EC2) là một dịch vụ cốt lõi của Amazon Web Services cung cấp năng lực tính toán co giãn trên nền tảng đám mây. Dưới đây là tổng quan về EC2:[1]\nEC2 cho phép người dùng khởi chạy các máy chủ ảo (gọi là instance) trong môi trường đám mây AWS. Hỗ trợ nhiều loại instance được tối ưu hóa cho các mục đích khác nhau, cung cấp sự kết hợp đa dạng giữa CPU, bộ nhớ, lưu trữ và băng thông mạng. Người dùng có toàn quyền kiểm soát đối với các instance EC2, bao gồm việc khởi động, dừng và kết thúc bất cứ lúc nào. Hỗ trợ nhiều hệ điều hành như các bản phân phối Linux khác nhau và Windows Server. Cung cấp nhiều mô hình giá linh hoạt: On-Demand, Reserved Instance và Spot Instance giúp tối ưu chi phí theo nhu cầu công việc. EC2 tích hợp với các dịch vụ khác của AWS như Elastic Block Store (EBS) để lưu trữ dữ liệu bền vững và Auto Scaling để tự động mở rộng quy mô theo nhu cầu. Tích hợp bảo mật như VPC, security groups và key pair để truy cập an toàn. Instance EC2 có thể được khởi chạy tại nhiều Availability Zone trong cùng một vùng để đảm bảo tính sẵn sàng cao và khả năng chịu lỗi. EC2 là nền tảng quan trọng cho nhiều ứng dụng và khối lượng công việc dựa trên đám mây nhờ khả năng mở rộng, linh hoạt và tích hợp chặt chẽ với các dịch vụ khác.\nNguồn:\n[1] AWS Compute Services category icon Compute - Overview of Amazon Web Services\nS3 Amazon DocumentDB Amazon Simple Storage Service (S3) là một dịch vụ lưu trữ đối tượng có khả năng mở rộng cao, độ bền cao và linh hoạt do AWS cung cấp. Tổng quan về S3: [1]\nLưu trữ đối tượng: S3 lưu trữ dữ liệu dưới dạng đối tượng trong các bucket – lý tưởng cho dữ liệu không có cấu trúc như tài liệu, hình ảnh và video. [2] Khả năng mở rộng: S3 có thể lưu trữ gần như không giới hạn dữ liệu, cho phép doanh nghiệp mở rộng lưu trữ linh hoạt. Độ bền và khả năng sẵn sàng: Được thiết kế với độ bền lên tới 99.999999999% (11 số 9), đảm bảo dữ liệu luôn an toàn. Bảo mật: Hỗ trợ mã hóa dữ liệu khi lưu trữ và khi truyền tải, chính sách kiểm soát truy cập và tích hợp IAM. Hiệu năng: Truy xuất dữ liệu với độ trễ thấp và tốc độ xử lý cao, phù hợp cho nhiều loại ứng dụng. Lớp lưu trữ đa dạng: Các lớp như S3 Standard, Intelligent-Tiering, S3 Glacier giúp tối ưu chi phí theo tần suất truy cập. Quản lý dữ liệu: Hỗ trợ versioning, replication, lifecycle policies giúp quản lý hiệu quả vòng đời dữ liệu. Tích hợp: Kết nối dễ dàng với các dịch vụ khác của AWS như Lambda, CloudFront, Athena… Chi phí hợp lý: Tính phí theo mức sử dụng thực tế. Khả năng truy cập toàn cầu: Truy cập dữ liệu từ bất kỳ đâu, lý tưởng cho phân phối nội dung toàn cầu. Nguồn:\n[1] What is Amazon S3? - Amazon Simple Storage Service\n[2] Cloud Object Storage – Amazon S3 – Amazon Web Services\nDocumentDB Amazon DocumentDB Amazon DocumentDB là một dịch vụ cơ sở dữ liệu dạng tài liệu được quản lý hoàn toàn bởi AWS, tương thích với MongoDB. Tổng quan về DocumentDB: [1]\nTương thích MongoDB: Hỗ trợ API MongoDB 3.6 và 4.0 – có thể sử dụng driver và công cụ MongoDB sẵn có với thay đổi tối thiểu.[2] Quản lý hoàn toàn: AWS đảm nhiệm việc cấp phát hạ tầng, vá lỗi, sao lưu và các tác vụ quản trị – bạn chỉ cần tập trung vào phát triển ứng dụng.[3] Khả năng mở rộng: Hỗ trợ hàng triệu truy vấn mỗi giây, lưu trữ mở rộng tự động – tối đa 128 TiB với instance-based và 4 PiB với Elastic Clusters. Hiệu suất cao: Sử dụng hệ thống lưu trữ phân tán, tự phục hồi và có khả năng chịu lỗi. Tính sẵn sàng cao: Dữ liệu được nhân bản qua nhiều Availability Zone. Bảo mật: Cách ly mạng, mã hóa khi lưu trữ và khi truyền, tích hợp IAM để kiểm soát truy cập. Trường hợp sử dụng: Phù hợp với hệ thống quản lý nội dung, hồ sơ người dùng, backend mobile và ứng dụng JSON động. Mô hình dữ liệu: Lưu trữ, truy vấn và đánh chỉ mục dữ liệu dạng JSON – phù hợp cho schema linh hoạt. Tích hợp: Kết nối với các dịch vụ như AWS Glue, Amazon S3, Amazon SageMaker để xử lý dữ liệu và machine learning. Nguồn:\n[1] JSON Document Database - Amazon DocumentDB (with MongoDB compatibility) Features - AWS\n[2] Amazon DocumentDB (with MongoDB compatibility) - Choosing an AWS NoSQL Database\n[3] The value of document databases in the public sector - AWS Public Sector Blog\n"
+},
+{
+	"uri": "//localhost:1313/3-initialize-aws-services/3-create-s3-bucket/",
+	"title": "Tạo S3 Bucket",
+	"tags": [],
+	"description": "",
+	"content": "Tạo S3 Bucket Mở Amazon S3 console tại https://console.aws.amazon.com/s3 chọn Create bucket Nhập bucket name ví dụ: workshop-s3-fe Uncheck Block all public access và check vào xác nhận bên dưới Kiểm tra và Create bucket Trong tab permission của bucket vừa tạo, tại phần Bucket policy chọn Edit, copy đoạn code sau và cho vào Policy: { \u0026#34;Version\u0026#34;: \u0026#34;2012-10-17\u0026#34;, \u0026#34;Statement\u0026#34;: [ { \u0026#34;Sid\u0026#34;: \u0026#34;PublicReadGetObject\u0026#34;, \u0026#34;Effect\u0026#34;: \u0026#34;Allow\u0026#34;, \u0026#34;Principal\u0026#34;: \u0026#34;*\u0026#34;, \u0026#34;Action\u0026#34;: \u0026#34;s3:GetObject\u0026#34;, \u0026#34;Resource\u0026#34;: \u0026#34;arn:aws:s3:::workshop-s3-fe/*\u0026#34; } ] } Chọn Save changes Lấy địa chỉ EC2 để cấu hình urlBE trong Frontend reactjs\nBuild Frontend:\nMở Fronend reactjs bằng Visual Studio Code Sửa lại biến môi trường VITE_BACKEND_URL trong file .env Build Frontendh bằng câu lẹnh npm run build trong terminal sẽ tạo ra folder dist (hoặc build) Upload các file/folder trong thư mục vừa build được lên S3:\nTại tab Objects của S3 bucket, chọn Upload Kéo các file/folder trong thư mục vừa build được vào phần Upload Chọn Upload và đợi upload xong Enable static website hosting\nTại tab Properties, trong phần Static website hosting chọn Edit Check Enable tại Static website hosting Trong phần Index document nhập index.html Nhấn Save change để lưu lại và kiểm tra Frontend "
+},
+{
+	"uri": "//localhost:1313/2-preparation/3-create-subnet-group/",
+	"title": "Tạo Subnet Group",
+	"tags": [],
+	"description": "",
+	"content": "Tạo Subnet Group cho DocumentDB Mở Amazon DocumentDB console tại https://console.aws.amazon.com/docdb/\nTrong thanh điều hướng bên trái, chọn Subnet groups sau đó ấn Create.\nTrong phần Subnet group detail:\nNhập name ví dụ: workshop-documentdb-subnet-group Nhập mô tả Trong phần Add subnets:\nChọn vpc đã tạo Chọn lần lượt hai Availability zone có subnet Mỗi AZ chọn một private subnet Add subnet Kiểm tra lại thông tin các subnet\nẤn Create để tạo subnet group\n"
+},
+{
+	"uri": "//localhost:1313/4-deploy-project/",
+	"title": "Triển khai dự án",
+	"tags": [],
+	"description": "",
+	"content": "Các bước triển khai Vì chúng ta đã triển khai frontend trước đó ở bước 3.3 Tạo S3 Bucket nên trong phần này chúng ta chỉ cần:\nTriển khai backend Trích xuất dữ liệu từ MongoDB lên DocumetDB Kiểm tra "
+},
+{
+	"uri": "//localhost:1313/5-clean-up-resources/",
+	"title": "Dọn dẹp tài nguyên",
+	"tags": [],
+	"description": "",
+	"content": "Empty bucket Đi đến AWS S3 Trong danh sách Bucket, hãy chọn Bucket liên quan Chọn Empty Trong trang Empty bucket, hãy xác nhận và chọn Empty Delete S3 Bucket Đến AWS S3 Chọn S3 bucket liên quan Chọn Delete sau đó xác nhận và chọn Delete bucket Delete DocumentDB Cluster Đến AWS DocumentDB Trong danh sách Cluster, hãy chọn Cluster liên quan (Optional) Nếu bạn chưa tắt deletion protection thì chọn Acions -\u0026gt; Modify sau đó bỏ chọn Enable deletion protection rôi chọn Continue -\u0026gt; Modify cluster Chọn Actions -\u0026gt; Delete Xác nhận và chọn Delete Terminate EC2 Instance Thoát SSH EC2 Vào Amazon EC2 console. Trong thanh điều hướng bên trái, chọn Instances Chọn EC2 instances liên quan Chọn Instance state Chọn Terminate instance Xác nhận Termination Delete Subnet group Lưu ý, bạn phải đợi xoá xong DocumentDB Cluster mới có thể xoá Subnet group\nĐến AWS DocumentDB Trong thanh điều hướng bên trái, chọn Subnet groups Chọn Subnet groups liên quan Chọn Actions -\u0026gt; Delete Xác nhận Delete Delete Security groups Đến AWS VPC Trong thanh điều hướng bên trái, chọn Security groups Trong danh sách Security groups, hãy chọn tất cả Security groups liên quan Chọn Actions -\u0026gt; Delete Security groups Xác nhận Delete Delete VPC Đến AWS VPC Trong thanh điều hướng bên trái, chọn Your VPCs Trong danh sách VPCs, hãy chọn VPC liên quan Chọn Actions -\u0026gt; Delete VPC Xác nhận Delete "
+},
+{
+	"uri": "//localhost:1313/categories/",
+	"title": "Categories",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "//localhost:1313/tags/",
+	"title": "Tags",
+	"tags": [],
+	"description": "",
+	"content": ""
+}]
