@@ -1,19 +1,19 @@
 ---
-title : "Giới thiệu"
+title : "Introduction"
 date : "`r Sys.Date()`"
 weight : 1
 chapter : false
 pre : " <b> 1. </b> "
 ---
 
-**Nội dung:**
-- [Tổng quan dự án](#tổng-quan-dự-án)
+**Contents:**
+- [Project Overview](#project-overview)
 - [Amazon DocumentDB](#amazon-documentdb)
 
-#### Tổng quan dự án
-Dự án website bán hàng được xây dựng với backend Node.js, cơ sở dữ liệu MongoDB và frontend React. Hệ thống hỗ trợ các tính năng cơ bản như: đăng ký, đăng nhập, thêm sản phẩm vào giỏ hàng, thanh toán và xem danh sách đơn hàng đã đặt. Đây là nền tảng có thể mở rộng cho các ứng dụng thương mại điện tử hiện đại.
+#### Project Overview
+The e-commerce website project is built with a Node.js backend, MongoDB database, and a React frontend. The system supports essential features such as user registration, login, adding products to the cart, payment, and viewing order history. This serves as a scalable foundation for modern e-commerce applications.
 
 #### Amazon DocumentDB
-Amazon DocumentDB là dịch vụ cơ sở dữ liệu tài liệu tương thích MongoDB do AWS cung cấp, hỗ trợ hai loại cluster (instance-based và elastic) với khả năng mở rộng đọc/ghi lên đến hàng triệu yêu cầu mỗi giây. Dung lượng lưu trữ tự động tăng tối đa 128 TiB, hỗ trợ tối đa 15 bản sao để tăng hiệu năng đọc, và cho phép thay đổi tài nguyên tính toán linh hoạt. Dữ liệu được mã hóa bằng AWS KMS, chạy trong mạng riêng VPC, và hỗ trợ sao lưu tự động cùng khôi phục theo thời gian. DocumentDB có khả năng tự động khôi phục và chuyển đổi dự phòng (failover) khi có sự cố, đồng thời đáp ứng các tiêu chuẩn bảo mật nghiêm ngặt như FedRAMP.
+Amazon DocumentDB is a MongoDB-compatible document database service provided by AWS. It supports two types of clusters (instance-based and elastic) with the ability to scale read/write operations to millions of requests per second. Storage automatically scales up to 128 TiB and supports up to 15 read replicas to improve read performance. It allows flexible compute resource scaling, encrypts data using AWS KMS, operates within a VPC, and supports automated backups with point-in-time recovery. DocumentDB features automatic recovery and failover, while meeting strict security standards such as FedRAMP compliance.
 
 {{< figure src="/images/Arch_Amazon-DocumentDB_16.svg" title="Amazon DocumentDB" width="150pc" >}}

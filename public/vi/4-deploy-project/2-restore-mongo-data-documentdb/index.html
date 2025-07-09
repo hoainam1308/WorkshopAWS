@@ -12,21 +12,21 @@
     <title>Trích xuất dữ liệu :: Tạo mới tài khoản AWS</title>
 
     
-    <link href="/css/nucleus.css?1751986165" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1751986165" rel="stylesheet">
-    <link href="/css/hybrid.css?1751986165" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1751986165" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1751986165" rel="stylesheet">
-    <link href="/css/auto-complete.css?1751986165" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1751986165" rel="stylesheet">
-    <link href="/css/theme.css?1751986165" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1751986165" rel="stylesheet">
+    <link href="/css/nucleus.css?1752043292" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1752043292" rel="stylesheet">
+    <link href="/css/hybrid.css?1752043292" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1752043292" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1752043292" rel="stylesheet">
+    <link href="/css/auto-complete.css?1752043292" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1752043292" rel="stylesheet">
+    <link href="/css/theme.css?1752043292" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1752043292" rel="stylesheet">
     
-    <link href="/css/theme-workshop.css?1751986165" rel="stylesheet">
+    <link href="/css/theme-workshop.css?1752043292" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1751986165"></script>
+    <script src="/js/jquery-3.3.1.min.js?1752043292"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1751986165"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1751986165"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1752043292"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1752043292"></script>
 <script type="text/javascript">
     
         var baseurl = "\/\/localhost:1313\/\/vi";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1751986165"></script>
+<script type="text/javascript" src="/js/search.js?1752043292"></script>
 
     
   </div>
@@ -684,7 +684,7 @@
 <h4 id="dump-dữ-liệu-từ-mongodb">Dump dữ liệu từ MongoDB</h4>
 <p>Ở phần này mình dùng <a href="https://www.mongodb.com/try/download/database-tools">MongoDB Database Tools</a> để export data</p>
 <ol>
-<li>Trong máy local gọi lệnh</li>
+<li>Trong máy local gọi lệnh:</li>
 </ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mongodump --uri<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;mongodb://localhost:27017/your_db&#34;</span> --out<span style="color:#f92672">=</span>dump-folder
 </span></span></code></pre></div><ol start="2">
@@ -694,11 +694,11 @@
 <ol>
 <li>Cài MongoDB tools trên EC2
 <ul>
-<li>Quay về thư mục ec2-user</li>
+<li>Quay về thư mục ec2-user:</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd ~
 </span></span></code></pre></div><ul>
-<li>Tạo file repo cho MongoDB</li>
+<li>Tạo file repo cho MongoDB:</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;[mongodb-org-6.0]  
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">name=MongoDB Repository  
@@ -707,17 +707,17 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">enabled=1  
 </span></span></span><span style="display:flex;"><span><span style="color:#e6db74">gpgkey=https://pgp.mongodb.com/server-6.0.asc&#34;</span> | sudo tee /etc/yum.repos.d/mongodb-org-6.0.repo
 </span></span></code></pre></div><ul>
-<li>Tải mongodb tools</li>
+<li>Tải mongodb tools:</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo yum install -y mongodb-org-tools
 </span></span></code></pre></div></li>
 <li>Restore dữ liệu lên DocumentDB
 <ul>
-<li>Tải file chứng chỉ</li>
+<li>Tải file chứng chỉ:</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -O https://s3.amazonaws.com/rds-downloads/rds-combined-ca-bundle.pem
 </span></span></code></pre></div><ul>
-<li>Restore lên DocumentDB</li>
+<li>Restore lên DocumentDB:</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mongorestore <span style="color:#ae81ff">\
 </span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>--host<span style="color:#f92672">=</span> docdb-xxxxx.cluster-xxxxx.us-east-1.docdb.amazonaws.com <span style="color:#ae81ff">\
@@ -730,7 +730,10 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>dump-folder
 </span></span></code></pre></div></li>
 </ol>
-<p>Lưu ý: Muốn gọi dữ liệu đã restore lên DocumentDB phải thêm tên csdl vào uri của DocumentDB trong Backend</p>
+
+<div class="notices warning" ><p>Muốn gọi dữ liệu đã restore lên DocumentDB phải thêm tên csdl vào uri của DocumentDB trong Backend</p>
+</div>
+
 
 
 
@@ -1029,19 +1032,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1751986165"></script>
-    <script src="/js/perfect-scrollbar.min.js?1751986165"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1751986165"></script>
-    <script src="/js/jquery.sticky.js?1751986165"></script>
-    <script src="/js/featherlight.min.js?1751986165"></script>
-    <script src="/js/highlight.pack.js?1751986165"></script>
+    <script src="/js/clipboard.min.js?1752043292"></script>
+    <script src="/js/perfect-scrollbar.min.js?1752043292"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1752043292"></script>
+    <script src="/js/jquery.sticky.js?1752043292"></script>
+    <script src="/js/featherlight.min.js?1752043292"></script>
+    <script src="/js/highlight.pack.js?1752043292"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1751986165"></script>
-    <script src="/js/learn.js?1751986165"></script>
-    <script src="/js/hugo-learn.js?1751986165"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1752043292"></script>
+    <script src="/js/learn.js?1752043292"></script>
+    <script src="/js/hugo-learn.js?1752043292"></script>
 
-    <link href="/mermaid/mermaid.css?1751986165" rel="stylesheet" />
-    <script src="/mermaid/mermaid.js?1751986165"></script>
+    <link href="/mermaid/mermaid.css?1752043292" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1752043292"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

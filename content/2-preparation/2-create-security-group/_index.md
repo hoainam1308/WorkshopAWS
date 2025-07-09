@@ -1,73 +1,58 @@
 ---
-title : "Tạo Security Group"
+title : "Create Security Group"
 date : "`r Sys.Date()`"
 weight : 2
 chapter : false
 pre : " <b> 2.2 </b> "
 ---
 
-#### Tạo Security Group cho EC2
+#### Create Security Group for EC2
 
-**ℹ️ Thông tin:** Security groups hoạt động như các tường lửa ảo cho các Amazon EC2 instances, giúp kiểm soát lưu lượng inbound (vào) và outbound (ra).
-Đối với triển khai DocumentDB, chúng ta cần tạo một security group cho các EC2 instances sẽ kết nối đến cơ sở dữ liệu của chúng ta.
+**ℹ️ Info:** Security groups act as virtual firewalls for Amazon EC2 instances, controlling inbound and outbound traffic.  
+For the DocumentDB deployment, we need to create a security group for the EC2 instances that will connect to our database.
 
-Thực hiện theo các bước sau để tạo Security Group với các cổng cần thiết:
+Follow these steps to create a Security Group with the necessary ports:
 
-1. Mở Amazon VPC console tại https://console.aws.amazon.com/vpc/.
+1. Open the Amazon VPC console at https://console.aws.amazon.com/vpc/.
 
-2. Trong thanh điều hướng VPC, trong phần **Security**, chọn **Security groups**.
+2. In the VPC navigation panel, under **Security**, choose **Security groups**.
 
-3. Chọn **Create security group**.
+3. Click **Create security group**.
 
-![Tạo Security group](/images/2/0004.png?featherlight=false&width=90pc)
+![Create Security Group](/images/2/0004.png?featherlight=false&width=90pc)
 
-4. Trong phần Basic details
-   - Nhập tên security goup ví dụ: ```workshop-ec2-sg```
-   - Nhập mô tả 
-   - Trong phần VPC, chọn vpc vừa tạo trước đó
+4. In the **Basic details** section:  
+   - Enter a name for the security group, e.g., `workshop-ec2-sg`  
+   - Add a description  
+   - For **VPC**, select the one created previously
 
-5. Trong phần **Inbound rules**, **Add rule** để cấu hình quyền truy cập
+5. In the **Inbound rules** section, click **Add rule** and configure access:
    - Type: **SSH**, Source: **My IP**
    - Type: **HTTP**, Source: **Anywhere**
    - Type: **HTTPS**, Source: **Anywhere**
    - Type: **Custom TCP**, Port range: **3000**, Source: **Anywhere**
 
    {{% notice note %}}
-   Đối với môi trường production, hãy hạn chế địa chỉ IP nguồn để truy cập SSH chỉ ở các dải IP đáng tin cậy thay vì cho phép truy cập từ bất kỳ đâu (0.0.0.0/0).
+   For production environments, restrict SSH access to trusted IP ranges instead of allowing access from anywhere (0.0.0.0/0).
    {{% /notice %}}
 
-![Tạo Security group](/images/2/0005.png?featherlight=false&width=90pc)
+![Create Security Group](/images/2/0005.png?featherlight=false&width=90pc)
 
-6. Xem lại cài đặt của bạn và nhấp vào **Create security group**.
+6. Review your settings and click **Create security group**.
 
-![Tạo Security group](/images/2/0006.png?featherlight=false&width=90pc)
+![Create Security Group](/images/2/0006.png?featherlight=false&width=90pc)
 
-7. Sau khi tạo, security group mới sẽ xuất hiện trong danh sách. Lưu ý ID vì bạn sẽ cần nó khi khởi chạy phiên bản EC2.
+7. After creation, the new security group will appear in the list. Take note of its ID as you will need it when launching an EC2 instance.
 
-![Tạo Security group](/images/2/0007.png?featherlight=false&width=90pc)
+![Create Security Group](/images/2/0007.png?featherlight=false&width=90pc)
 
 
-#### Tạo Security Group cho DocumentDB
+#### Create Security Group for DocumentDB
 
-Thực hiện theo các bước sau để tạo Security Group cho DocumentDB với các cổng cần thiết:
+Follow these steps to create a Security Group for DocumentDB with the required port:
 
-1. Tại danh sách **Security Groups**, chọn **Create security group**.
-![Tạo Security group](/images/2/0008.png?featherlight=false&width=90pc)
+1. From the **Security Groups** list, click **Create security group**.  
+![Create Security Group](/images/2/0008.png?featherlight=false&width=90pc)
 
-2. Trong phần **Basic details**
-   - Nhập tên security goup ví dụ: ```workshop-documentdb-sg```
-   - Nhập mô tả 
-   - Trong phần **VPC**, chọn vpc vừa tạo trước đó
-
-3. Trong phần **Inbound rules**, ấn Add rule để cấu hình quyền truy cập
-   - Type: **Custom TCP**, Port range: **27017**, Source: **Custom** và chọn **workshop-ec2-sg**
-
-![Tạo Security group](/images/2/0009.png?featherlight=false&width=90pc)
-
-4. Xem lại cài đặt của bạn và nhấp vào **Create security group**.
-
-![Tạo Security group](/images/2/0010.png?featherlight=false&width=90pc)
-
-![Tạo Security group](/images/2/0011.png?featherlight=false&width=90pc)
-
-![Tạo Security group](/images/2/0012.png?featherlight=false&width=90pc)
+2. In the **Basic details** section:  
+   - Enter a name for the se

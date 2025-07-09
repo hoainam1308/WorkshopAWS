@@ -11,8 +11,8 @@ pre : " <b> 2. </b> "
 Trong workshop, bạn sẽ xây dựng một môi trường Amazon VPC hoàn chỉnh theo các biện pháp thực hành tốt nhất của AWS về kiến ​​trúc mạng và bảo mật. Bạn sẽ tạo tất cả các thành phần thiết yếu cần thiết cho việc triển khai VPC sẵn sàng cho production.
 
 Ngoài ra các bạn nên để source code của mình trên github để dễ dàng tải xuống.  
-[Backend nodejs](https://github.com/hoainam1308/DeployedBEAWS.git)  
-[Frontend reacjs](https://github.com/hoainam1308/DeployedFEAWS.git)
+[Backend Node.js](https://github.com/hoainam1308/DeployedBEAWS.git)  
+[Frontend React.js](https://github.com/hoainam1308/DeployedFEAWS.git)
 
 Kiến trúc chúng tôi sẽ triển khai được minh họa trong sơ đồ bên dưới:
 

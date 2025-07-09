@@ -1,46 +1,46 @@
 ---
-title : "Tạo VPC"
+title : "Create VPC"
 date : "`r Sys.Date()`"
 weight : 1
 chapter : false
 pre : " <b> 2.1 </b> "
 ---
 
-#### Tạo VPC với các Subnets và các tài nguyên liên quan
+#### Create a VPC with Subnets and Related Resources
 
-**ℹ️ Thông tin:** Amazon Virtual Private Cloud (Amazon VPC) cho phép bạn khởi chạy tài nguyên AWS vào mạng ảo mà bạn đã xác định. Mạng ảo này rất giống với mạng truyền thống trong trung tâm dữ liệu của riêng bạn, với lợi ích là sử dụng cơ sở hạ tầng có thể mở rộng của AWS.  
+**ℹ️ Info:** Amazon Virtual Private Cloud (Amazon VPC) allows you to launch AWS resources into a virtual network that you define. This virtual network closely resembles a traditional network in your own data center, with the added benefit of AWS's scalable infrastructure.
 
-Thực hiện theo các bước sau để tạo VPC với tất cả các thành phần cần thiết cho việc triển khai website của bạn:
+Follow the steps below to create a VPC with all the necessary components for deploying your website:
 
-1. Mở Amazon VPC console tại https://console.aws.amazon.com/vpc/.
+1. Open the Amazon VPC console at https://console.aws.amazon.com/vpc/.
 
-2. Trên VPC dashboard, chọn **Create VPC**.
+2. On the VPC dashboard, select **Create VPC**.
 
-![Tạo VPC](/images/2/0001.png?featherlight=false&width=90pc)
+![Create VPC](/images/2/0001.png?featherlight=false&width=90pc)
 
-3. Để tạo Resource, chọn **VPC and more** để tạo môi trường VPC hoàn chỉnh.
+3. To create resources, select **VPC and more** to set up a complete VPC environment.
 
-![Tạo VPC](/images/2/0002.png?featherlight=false&width=90pc)
+![Create VPC](/images/2/0002.png?featherlight=false&width=90pc)
 
-4. Cấu hình tùy chọn **Auto-generate** thẻ Name theo sở thích của bạn. Tùy chọn này cho phép AWS tự động tạo tên nhất quán cho tất cả tài nguyên VPC.
+4. Configure the **Auto-generate** name tag option based on your preference. This allows AWS to automatically create consistent naming for all VPC resources.
 
-5. Nhập một dải địa chỉ IPv4 CIDR cho VPC của bạn (ví dụ: 10.0.0.0/16). Dải địa chỉ này xác định phạm vi IP có sẵn trong VPC.
+5. Enter an IPv4 CIDR block range for your VPC (e.g., 10.0.0.0/16). This defines the IP address range available within your VPC.
 
-6. (Tùy chọn) Để bật hỗ trợ IPv6, chọn IPv6 CIDR block và chọn một dải IPv6 được Amazon cung cấp.
+6. (Optional) To enable IPv6 support, select **IPv6 CIDR block** and choose an Amazon-provided IPv6 range.
 
-7. Đối với Number of Availability Zones (AZs), chọn ít nhất hai AZs để đảm bảo tính sẵn sàng cao.
+7. For **Number of Availability Zones (AZs)**, select at least two AZs to ensure high availability.
 
-8. Chọn ít nhất hai private subnets để tạo subnet group cho DocumentDB.
+8. Select at least two **private subnets** to create a subnet group for DocumentDB.
 
-9. Xem lại phần Preview để xem sơ đồ trực quan về kiến trúc VPC bạn đã cấu hình.
+9. Review the **Preview** section to see a visual diagram of your configured VPC architecture.
 
-10. Chọn **Create VPC** để khởi tạo tất cả các tài nguyên đã cấu hình.
+10. Click **Create VPC** to provision all configured resources.
 
-![Tạo VPC](/images/2/0003.png?featherlight=false&width=90pc)
+![Create VPC](/images/2/0003.png?featherlight=false&width=90pc)
 
-11. Cấu hình cho public subnet:
-    - Trong VPC console chọn **public subnet**
-    - Chọn **Actions** -> **Edit subnet settings**
-    - Check vào **Enable auto-assign public IPv4 address**
+11. Configure the public subnet:
+    - In the VPC console, select the **public subnet**
+    - Click **Actions** -> **Edit subnet settings**
+    - Check the option **Enable auto-assign public IPv4 address**
 
-![Tạo VPC](/images/2/0017.png?featherlight=false&width=90pc)
+![Create VPC](/images/2/0017.png?featherlight=false&width=90pc)

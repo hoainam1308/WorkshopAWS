@@ -1,36 +1,37 @@
 ---
-title : "Tạo Subnet Group"
+title : "Create Subnet Group"
 date : "`r Sys.Date()`"
 weight : 3
 chapter : false
 pre : " <b> 2.3 </b> "
 ---
 
-#### Tạo Subnet Group cho DocumentDB
-1. Mở Amazon DocumentDB console tại https://console.aws.amazon.com/docdb/
+#### Create Subnet Group for DocumentDB
 
-2. Trong thanh điều hướng bên trái, chọn **Subnet groups** sau đó ấn **Create**.
+1. Open the Amazon DocumentDB console at https://console.aws.amazon.com/docdb/
 
-![Tạo Subnet group](/images/2/0014.png?featherlight=false&width=90pc)
+2. In the left-hand navigation panel, select **Subnet groups**, then click **Create**.
 
-3. Trong phần **Subnet group detail**:
-    - Nhập name ví dụ: ```workshop-documentdb-subnet-group```
-    - Nhập mô tả
+![Create Subnet Group](/images/2/0014.png?featherlight=false&width=90pc)
 
-4. Trong phần **Add subnets**:
-    - Chọn **vpc** đã tạo
-    - Chọn lần lượt **hai Availability zone** có subnet 
-    - Mỗi AZ chọn **một private subnet**
-    - **Add subnet**
+3. In the **Subnet group detail** section:
+   - Enter a name, e.g., `workshop-documentdb-subnet-group`
+   - Enter a description
 
-![Tạo Subnet group](/images/2/0019.png?featherlight=false&width=90pc)
+4. In the **Add subnets** section:
+   - Select the **VPC** you created earlier
+   - Select **two Availability Zones** that contain subnets
+   - For each AZ, select **one private subnet**
+   - Click **Add subnet**
 
-![Tạo Subnet group](/images/2/0020.png?featherlight=false&width=90pc)
+![Create Subnet Group](/images/2/0019.png?featherlight=false&width=90pc)
 
-5. Kiểm tra lại thông tin các subnet
+![Create Subnet Group](/images/2/0020.png?featherlight=false&width=90pc)
 
-6. Ấn **Create** để tạo subnet group
+5. Review the subnet information to ensure accuracy
 
-![Tạo Subnet group](/images/2/0021.png?featherlight=false&width=90pc)
+6. Click **Create** to create the subnet group
 
-![Tạo Subnet group](/images/2/0022.png?featherlight=false&width=90pc)
+![Create Subnet Group](/images/2/0021.png?featherlight=false&width=90pc)
+
+![Create Subnet Group](/images/2/0022.png?featherlight=false&width=90pc)

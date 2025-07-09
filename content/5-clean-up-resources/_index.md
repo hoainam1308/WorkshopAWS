@@ -1,58 +1,86 @@
 ---
-title : "Dọn dẹp tài nguyên"
+title : "Clean Up Resources"
 date : "`r Sys.Date()`"
 weight : 5
 chapter : false
 pre : " <b> 5. </b> "
 ---
 
-#### Empty bucket
-1. Đi đến AWS S3
-2. Trong danh sách **Bucket**, hãy chọn **Bucket** liên quan
-3. Chọn **Empty**
-4. Trong trang **Empty bucket**, hãy xác nhận và chọn **Empty**
+## 🧹 Clean Up AWS Resources
 
-#### Delete S3 Bucket
-1. Đến AWS S3
-2. Chọn **S3 bucket** liên quan
-3. Chọn **Delete** sau đó xác nhận và chọn **Delete bucket**
+After completing your deployment and testing, it's recommended to clean up unused AWS resources to avoid unnecessary charges.
 
-#### Delete DocumentDB Cluster
-1. Đến AWS DocumentDB
-2. Trong danh sách **Cluster**, hãy chọn **Cluster** liên quan
-3. (Optional) Nếu bạn chưa tắt **deletion protection** thì chọn **Acions** -> **Modify** sau đó bỏ chọn **Enable deletion protection** rôi chọn **Continue** -> **Modify cluster**
-4. Chọn **Actions** -> **Delete**
-5. Xác nhận và chọn **Delete**
+---
 
-#### Terminate EC2 Instance
-1. Thoát SSH EC2
-2. Vào Amazon EC2 console.
-3. Trong thanh điều hướng bên trái, chọn **Instances**
-4. Chọn **EC2 instances** liên quan
-5. Chọn **Instance state**
-6. Chọn **Terminate instance**
-7. Xác nhận **Termination**
+### 🪣 Empty S3 Bucket
 
-#### Delete Subnet group
+1. Go to the **Amazon S3 Console**
+2. From the bucket list, select the relevant **Bucket**
+3. Click **Empty**
+4. On the **Empty bucket** page, confirm and click **Empty**
+
+---
+
+### ❌ Delete S3 Bucket
+
+1. Go to **Amazon S3**
+2. Select the relevant **Bucket**
+3. Click **Delete**, confirm the action, and click **Delete bucket**
+
+---
+
+### 🗑️ Delete DocumentDB Cluster
+
+1. Go to **Amazon DocumentDB**
+2. In the **Clusters** list, select the appropriate **Cluster**
+3. *(Optional)* If **Deletion protection** is enabled:
+   - Click **Actions** → **Modify**
+   - Uncheck **Enable deletion protection**
+   - Click **Continue** → **Modify cluster**
+4. Click **Actions** → **Delete**
+5. Confirm and click **Delete**
+
+---
+
+### 💻 Terminate EC2 Instance
+
+1. Exit the SSH session if connected
+2. Go to the **Amazon EC2 Console**
+3. In the left navigation pane, select **Instances**
+4. Select the EC2 instance
+5. Click **Instance state** → **Terminate instance**
+6. Confirm **Termination**
+
+---
+
+### 🌐 Delete Subnet Group
+
 {{% notice note %}}
-Lưu ý, bạn phải đợi xoá xong DocumentDB Cluster mới có thể xoá Subnet group
+You must wait until the DocumentDB cluster is fully deleted before deleting its subnet group.
 {{% /notice %}}
-1. Đến AWS DocumentDB
-2. Trong thanh điều hướng bên trái, chọn **Subnet groups**
-3. Chọn **Subnet groups** liên quan
-4. Chọn **Actions** -> **Delete**
-5. Xác nhận **Delete**
 
-#### Delete Security groups
-1. Đến AWS VPC
-2. Trong thanh điều hướng bên trái, chọn **Security groups**
-3. Trong danh sách **Security groups**, hãy chọn **tất cả** **Security groups** liên quan
-4. Chọn **Actions** -> **Delete Security groups**
-5. Xác nhận **Delete**
+1. Go to **Amazon DocumentDB**
+2. In the left menu, select **Subnet groups**
+3. Select the relevant **Subnet group**
+4. Click **Actions** → **Delete**
+5. Confirm the **Deletion**
 
-#### Delete VPC
-1. Đến AWS VPC
-2. Trong thanh điều hướng bên trái, chọn **Your VPCs**
-3. Trong danh sách **VPCs**, hãy chọn **VPC** liên quan
-4. Chọn **Actions** -> **Delete VPC**
-5. Xác nhận **Delete**
+---
+
+### 🔐 Delete Security Groups
+
+1. Go to **Amazon VPC**
+2. In the left menu, choose **Security groups**
+3. Select all relevant **Security groups**
+4. Click **Actions** → **Delete Security groups**
+5. Confirm the **Deletion**
+
+---
+
+### 🌐 Delete VPC
+
+1. Go to **Amazon VPC**
+2. In the left menu, select **Your VPCs**
+3. From the VPC list, select the relevant **VPC**
+4. Click **Actions** → **Delete VPC**
+5. Confirm the **Deletion**

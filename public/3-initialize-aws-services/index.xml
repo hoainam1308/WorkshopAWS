@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Khởi tạo các dịch vụ AWS cần thiết on Create a new AWS account.</title>
+    <title>Initialize Required AWS Services on Create a new AWS account.</title>
     <link>//localhost:1313/3-initialize-aws-services/</link>
-    <description>Recent content in Khởi tạo các dịch vụ AWS cần thiết on Create a new AWS account.</description>
+    <description>Recent content in Initialize Required AWS Services on Create a new AWS account.</description>
     <generator>Hugo</generator>
     <language>en</language>
     <atom:link href="//localhost:1313/3-initialize-aws-services/index.xml" rel="self" type="application/rss+xml" />

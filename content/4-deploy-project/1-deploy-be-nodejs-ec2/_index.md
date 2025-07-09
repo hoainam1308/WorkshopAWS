@@ -1,35 +1,38 @@
 ---
-title : "Triển khai Backend"
+title : "Deploy Backend"
 date : "`r Sys.Date()`"
 weight : 1
 chapter : false
 pre : " <b> 4.1 </b> "
 ---
 
-## Các bước triển khai
+## Deployment Steps
 
-#### SSh vào EC2
-Ở phần này mình dùng MobaXterm các bạn có thể tải [tại đây](https://mobaxterm.mobatek.net/):  
-1. Sau khi cài đặt xong, trong giao diện chính, chọn **Sessions** -> **New Session** sau đó chọn **SSH**
+#### SSh into EC2
+In this section, we use **MobaXterm**, which you can download [here](https://mobaxterm.mobatek.net/):
+
+1. After installation, open the main interface, click **Sessions** → **New Session**, then choose **SSH**.
 
 ![Deploy Backend](/images/4/0041.png?featherlight=false&width=90pc)
 
-2. Quay lại EC2 Console, trong phần **Instances** chọn **Instances** sau đó chọn EC2 đã tạo và chọn **Connect**
+2. Go back to the **EC2 Console**, under **Instances**, select your EC2 instance and click **Connect**.
 
 ![Deploy Backend](/images/3/0032.png?featherlight=false&width=90pc)
 
-3. Trong tab **SHH client** copy **Public DNS**
+3. In the **SSH client** tab, copy the **Public DNS**.
 
-4. Trong phần **Basic SSH settings** của MobaXterm:
-   - Dán **Public DNS** vừa copy vào **Remote host**
-   - Tick vào **Specify username** và nhập ```ec2-user```
-5. Chọn **Advanced SSH settings**:
-   - Tick **Use private key** và chọn file **my-workshop-keypair.pem** đã lưu
-   - Nhấn **OK** để connect
+
+4. In **Basic SSH settings** in MobaXterm:
+   - Paste the copied **Public DNS** into **Remote host**
+   - Tick **Specify username** and enter `ec2-user`
+
+5. In **Advanced SSH settings**:
+   - Tick **Use private key** and select the saved key file `my-workshop-keypair.pem`
+   - Click **OK** to connect
 
 ![Deploy Backend](/images/4/0042.png?featherlight=false&width=90pc)
 
-6. Chọn **Access** 
+6. Click **Access** 
 
 ![Deploy Backend](/images/4/0043.png?featherlight=false&width=90pc)
 
@@ -37,71 +40,70 @@ pre : " <b> 4.1 </b> "
 
 #### Tải source code từ Github về EC2 và cài các thư viện cần thiết
 
-1. Trong EC2 chạy câu lệnh sau để cài git
+1. In the EC2 terminal, install Git:
 ```bash
 sudo yum install git -y
 ```
 
-2. Clone project
+2. Clone project:
 ```bash
 git clone PROJECT_LINK
 ```
 
-3. Refresh thư mục để kiểm tra
+3. Refresh the folder view to verify the cloned repo.
 
 ![Deploy Backend](/images/4/0045.png?featherlight=false&width=90pc)
 
-4. Cài nvm 
+4. Install **nvm** (Node Version Manager):
 
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 ```
 
-5. Kích hoạt nvm export 
+5. Activate nvm:
 ```bash
 NVM_DIR="$HOME/.nvm"
 source "$NVM_DIR/nvm.sh"
 ```
 
-6. Cài và sử dụng node nvm install 16
-
+6. Install and use Node.js version 16:
 ```bash
 nvm use 16
 ```
 
-7. Kiểm tra node
+7. Check installed versions:
 
 ```bash
 node -v
 npm -v
 ```
 
-8. Trong thư mục project, tạo các file cần thiết như .env
+8. Inside the project folder, create the required .env and other configuration files.
 
-9. Tải dependencies
+9. Install dependencies:
 
 ```bash
-cd project
+cd FOLER_PROJECT
 npm install
 ```
 
-#### Kết nối tới DocumentDB và FE
+#### Connect to DocumentDB and Frontend
 
-1. Tải tệp [global bundle.pem](https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem) và upload lên thư mục project 
+1. Download the [global bundle.pem](https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem) and upload it to your project directory.
 
    {{% notice tip %}}
-   Khi tải về nên đặt trong Downloads hoặc Documents của của user bạn dang dùng để tránh gặp lỗi permission khi upload
+   It’s recommended to save the file in your user's Downloads or Documents folder to avoid permission issues when uploading.
    {{% /notice %}}
 
-2. Vào DocumentDB console tại **Clusters** chọn DocumentDB đã tạo copy phần **connect with application**
+2. In the **DocumentDB console**, under **Clusters**, select your DocumentDB instance and copy the **Connect with application** URI.
 
 ![Deploy Backend](/images/4/0049.png?featherlight=false&width=90pc)
 
-3. Sau đó nhập mật khẩu của bạn vào uri vừa copy và đặt vào phần mongoose.connect trong project trên ec2
+3. Insert your password into the copied connection URI and paste it into the mongoose.connect line in your backend code.
 
-4. Copy đường dẫn đến static website hosting s3 của bạn và đặt vào urlFE axios trong Backend
+4. Copy your **S3 Static Website Hosting** URL and set it as the urlFE (frontend URL) in your backend’s Axios configuration.
 
-5. Chạy Backend để kiểm tra
+5. Start the backend server:
 
 ```bash
 npm start

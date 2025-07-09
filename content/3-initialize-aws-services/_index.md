@@ -1,5 +1,5 @@
 ---
-title: "Khởi tạo các dịch vụ AWS cần thiết"
+title: "Initialize Required AWS Services"
 date: "`r Sys.Date()`"
 weight: 3
 chapter: false
@@ -10,21 +10,21 @@ pre: " <b> 3. </b> "
 
 {{< figure src="/images/Arch_Amazon-EC2_64.png" title="Amazon DocumentDB" width="150pc" >}}
 
-Amazon Elastic Compute Cloud (EC2) là một dịch vụ cốt lõi của Amazon Web Services cung cấp năng lực tính toán co giãn trên nền tảng đám mây. Dưới đây là tổng quan về EC2:[[1]](https://docs.aws.amazon.com/whitepapers/latest/aws-overview/compute-services.html)
+Amazon Elastic Compute Cloud (EC2) is a core AWS service that provides scalable computing capacity in the cloud. Below is an overview of EC2: [[1]](https://docs.aws.amazon.com/whitepapers/latest/aws-overview/compute-services.html)
 
-- EC2 cho phép người dùng khởi chạy các máy chủ ảo (gọi là instance) trong môi trường đám mây AWS.
-- Hỗ trợ nhiều loại instance được tối ưu hóa cho các mục đích khác nhau, cung cấp sự kết hợp đa dạng giữa CPU, bộ nhớ, lưu trữ và băng thông mạng.
-- Người dùng có toàn quyền kiểm soát đối với các instance EC2, bao gồm việc khởi động, dừng và kết thúc bất cứ lúc nào.
-- Hỗ trợ nhiều hệ điều hành như các bản phân phối Linux khác nhau và Windows Server.
-- Cung cấp nhiều mô hình giá linh hoạt: On-Demand, Reserved Instance và Spot Instance giúp tối ưu chi phí theo nhu cầu công việc.
-- EC2 tích hợp với các dịch vụ khác của AWS như Elastic Block Store (EBS) để lưu trữ dữ liệu bền vững và Auto Scaling để tự động mở rộng quy mô theo nhu cầu.
-- Tích hợp bảo mật như VPC, security groups và key pair để truy cập an toàn.
-- Instance EC2 có thể được khởi chạy tại nhiều Availability Zone trong cùng một vùng để đảm bảo tính sẵn sàng cao và khả năng chịu lỗi.
+- EC2 allows users to launch virtual servers (called instances) in the AWS cloud environment.
+- Supports various instance types optimized for different use cases, offering a mix of CPU, memory, storage, and network capacity.
+- Users have full control over EC2 instances, including the ability to start, stop, and terminate them at any time.
+- Supports multiple operating systems such as various Linux distributions and Windows Server.
+- Offers flexible pricing models: On-Demand, Reserved Instances, and Spot Instances to optimize costs based on workload needs.
+- Integrates with other AWS services like Elastic Block Store (EBS) for persistent storage and Auto Scaling for dynamic scaling.
+- Security integrations such as VPC, security groups, and key pairs for secure access.
+- EC2 instances can be launched across multiple Availability Zones within a region to ensure high availability and fault tolerance.
 
-EC2 là nền tảng quan trọng cho nhiều ứng dụng và khối lượng công việc dựa trên đám mây nhờ khả năng mở rộng, linh hoạt và tích hợp chặt chẽ với các dịch vụ khác.
+EC2 is a foundational platform for many cloud-based applications due to its scalability, flexibility, and integration with the AWS ecosystem.
 
-**Nguồn:**  
-[[1] AWS Compute Services category icon Compute - Overview of Amazon Web Services](https://docs.aws.amazon.com/whitepapers/latest/aws-overview/compute-services.html)
+**Source:**  
+[[1] AWS Compute Services Overview](https://docs.aws.amazon.com/whitepapers/latest/aws-overview/compute-services.html)
 
 ---
 
@@ -32,22 +32,22 @@ EC2 là nền tảng quan trọng cho nhiều ứng dụng và khối lượng c
 
 {{< figure src="/images/Arch_Amazon-Simple-Storage-Service_48.png" title="Amazon DocumentDB" width="150pc" >}}
 
-Amazon Simple Storage Service (S3) là một dịch vụ lưu trữ đối tượng có khả năng mở rộng cao, độ bền cao và linh hoạt do AWS cung cấp. Tổng quan về S3: [[1]](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html)
+Amazon Simple Storage Service (S3) is a highly scalable, durable, and flexible object storage service provided by AWS. Overview of S3: [[1]](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html)
 
-- **Lưu trữ đối tượng:** S3 lưu trữ dữ liệu dưới dạng đối tượng trong các bucket – lý tưởng cho dữ liệu không có cấu trúc như tài liệu, hình ảnh và video. [[2]](https://aws.amazon.com/s3/)
-- **Khả năng mở rộng:** S3 có thể lưu trữ gần như không giới hạn dữ liệu, cho phép doanh nghiệp mở rộng lưu trữ linh hoạt.
-- **Độ bền và khả năng sẵn sàng:** Được thiết kế với độ bền lên tới 99.999999999% (11 số 9), đảm bảo dữ liệu luôn an toàn.
-- **Bảo mật:** Hỗ trợ mã hóa dữ liệu khi lưu trữ và khi truyền tải, chính sách kiểm soát truy cập và tích hợp IAM.
-- **Hiệu năng:** Truy xuất dữ liệu với độ trễ thấp và tốc độ xử lý cao, phù hợp cho nhiều loại ứng dụng.
-- **Lớp lưu trữ đa dạng:** Các lớp như S3 Standard, Intelligent-Tiering, S3 Glacier giúp tối ưu chi phí theo tần suất truy cập.
-- **Quản lý dữ liệu:** Hỗ trợ versioning, replication, lifecycle policies giúp quản lý hiệu quả vòng đời dữ liệu.
-- **Tích hợp:** Kết nối dễ dàng với các dịch vụ khác của AWS như Lambda, CloudFront, Athena…
-- **Chi phí hợp lý:** Tính phí theo mức sử dụng thực tế.
-- **Khả năng truy cập toàn cầu:** Truy cập dữ liệu từ bất kỳ đâu, lý tưởng cho phân phối nội dung toàn cầu.
+- **Object Storage:** S3 stores data as objects in buckets – ideal for unstructured data like documents, images, and videos. [[2]](https://aws.amazon.com/s3/)
+- **Scalability:** Virtually unlimited storage allows businesses to scale as needed.
+- **Durability and Availability:** Designed for 99.999999999% (11 9s) durability, ensuring data remains safe.
+- **Security:** Supports encryption at rest and in transit, access control policies, and IAM integration.
+- **Performance:** Low-latency, high-throughput access makes it suitable for a wide range of applications.
+- **Storage Classes:** Multiple tiers such as S3 Standard, Intelligent-Tiering, S3 Glacier help optimize cost based on access patterns.
+- **Data Management:** Features like versioning, replication, and lifecycle policies for efficient data lifecycle control.
+- **Integration:** Works seamlessly with AWS services like Lambda, CloudFront, Athena, and more.
+- **Cost-effective:** Pay-as-you-go pricing based on actual usage.
+- **Global Access:** Access your data from anywhere, ideal for global content delivery.
 
-**Nguồn:**  
-[[1] What is Amazon S3? - Amazon Simple Storage Service](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html)  
-[[2] Cloud Object Storage – Amazon S3 – Amazon Web Services](https://aws.amazon.com/s3/)
+**Sources:**  
+[[1] What is Amazon S3?](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html)  
+[[2] Amazon S3 Overview](https://aws.amazon.com/s3/)
 
 ---
 
@@ -55,19 +55,19 @@ Amazon Simple Storage Service (S3) là một dịch vụ lưu trữ đối tư�
 
 {{< figure src="/images/Arch_Amazon-DocumentDB_64.png" title="Amazon DocumentDB" width="150pc" >}}
 
-Amazon DocumentDB là một dịch vụ cơ sở dữ liệu dạng tài liệu được quản lý hoàn toàn bởi AWS, tương thích với MongoDB. Tổng quan về DocumentDB: [[1]](https://aws.amazon.com/documentdb/features/)  
+Amazon DocumentDB is a fully managed document database service from AWS, compatible with MongoDB. Overview of DocumentDB: [[1]](https://aws.amazon.com/documentdb/features/)  
 
-- **Tương thích MongoDB:** Hỗ trợ API MongoDB 3.6 và 4.0 – có thể sử dụng driver và công cụ MongoDB sẵn có với thay đổi tối thiểu.[[2]](https://docs.aws.amazon.com/whitepapers/latest/choosing-an-aws-nosql-database/amazon-documentdb.html)  
-- **Quản lý hoàn toàn:** AWS đảm nhiệm việc cấp phát hạ tầng, vá lỗi, sao lưu và các tác vụ quản trị – bạn chỉ cần tập trung vào phát triển ứng dụng.[[3]](https://aws.amazon.com/blogs/publicsector/value-of-document-databases-in-public-sector-amazon-documentdb/)
-- **Khả năng mở rộng:** Hỗ trợ hàng triệu truy vấn mỗi giây, lưu trữ mở rộng tự động – tối đa 128 TiB với instance-based và 4 PiB với Elastic Clusters.
-- **Hiệu suất cao:** Sử dụng hệ thống lưu trữ phân tán, tự phục hồi và có khả năng chịu lỗi.
-- **Tính sẵn sàng cao:** Dữ liệu được nhân bản qua nhiều Availability Zone.
-- **Bảo mật:** Cách ly mạng, mã hóa khi lưu trữ và khi truyền, tích hợp IAM để kiểm soát truy cập.
-- **Trường hợp sử dụng:** Phù hợp với hệ thống quản lý nội dung, hồ sơ người dùng, backend mobile và ứng dụng JSON động.
-- **Mô hình dữ liệu:** Lưu trữ, truy vấn và đánh chỉ mục dữ liệu dạng JSON – phù hợp cho schema linh hoạt.
-- **Tích hợp:** Kết nối với các dịch vụ như AWS Glue, Amazon S3, Amazon SageMaker để xử lý dữ liệu và machine learning.
+- **MongoDB-Compatible:** Supports MongoDB 3.6 and 4.0 APIs – allowing use of existing drivers and tools with minimal changes. [[2]](https://docs.aws.amazon.com/whitepapers/latest/choosing-an-aws-nosql-database/amazon-documentdb.html)  
+- **Fully Managed:** AWS handles infrastructure provisioning, patching, backups, and maintenance so developers can focus on building applications. [[3]](https://aws.amazon.com/blogs/publicsector/value-of-document-databases-in-public-sector-amazon-documentdb/)
+- **Scalability:** Supports millions of queries per second and auto-scales storage – up to 128 TiB (instance-based) or 4 PiB (Elastic Clusters).
+- **High Performance:** Uses distributed, fault-tolerant storage architecture.
+- **High Availability:** Data is replicated across multiple Availability Zones.
+- **Security:** Network isolation, encryption at rest and in transit, IAM integration for access control.
+- **Use Cases:** Ideal for content management systems, user profile stores, mobile backends, and dynamic JSON apps.
+- **Data Model:** Stores, queries, and indexes JSON-format data – suitable for flexible schemas.
+- **Integration:** Works with AWS Glue, S3, SageMaker, and other services for data processing and machine learning.
 
-**Nguồn:**  
-[[1] JSON Document Database - Amazon DocumentDB (with MongoDB compatibility) Features - AWS](https://aws.amazon.com/documentdb/features/)  
-[[2] Amazon DocumentDB (with MongoDB compatibility) - Choosing an AWS NoSQL Database](https://docs.aws.amazon.com/whitepapers/latest/choosing-an-aws-nosql-database/amazon-documentdb.html)  
-[[3] The value of document databases in the public sector - AWS Public Sector Blog](https://aws.amazon.com/blogs/publicsector/value-of-document-databases-in-public-sector-amazon-documentdb/)
+**Sources:**  
+[[1] Amazon DocumentDB (MongoDB compatible) Features](https://aws.amazon.com/documentdb/features/)  
+[[2] Choosing an AWS NoSQL Database – Amazon DocumentDB](https://docs.aws.amazon.com/whitepapers/latest/choosing-an-aws-nosql-database/amazon-documentdb.html)  
+[[3] Value of Document Databases in the Public Sector – AWS Blog](https://aws.amazon.com/blogs/publicsector/value-of-document-databases-in-public-sector-amazon-documentdb/)
